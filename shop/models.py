@@ -3,15 +3,15 @@ from django.urls import reverse
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=150, db_index=True)
-    slug = models.SlugField(max_length=150, unique=True ,db_index=True)
+    name = models.CharField("kategori adı", max_length=150, db_index=True)
+    slug = models.SlugField("internet adresi",max_length=150, unique=True ,db_index=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         ordering = ('name', )
-        verbose_name = 'category'
-        verbose_name_plural = 'categories'
+        verbose_name = 'Kategori'
+        verbose_name_plural = 'Kategoriler'
 
     def __str__(self):
         return self.name
@@ -21,20 +21,22 @@ class Category(models.Model):
 
 
 class Product(models.Model):
-    category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE)
-    name = models.CharField(max_length=100, db_index=True)
-    slug = models.SlugField(max_length=100, db_index=True)
-    description = models.TextField(blank=True)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-    available = models.BooleanField(default=True)
-    stock = models.PositiveIntegerField(default = 100)
+    category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE, verbose_name = "kategori")
+    name = models.CharField("ürün adı", max_length=100, db_index=True)
+    slug = models.SlugField("internet adresi",max_length=100, db_index=True)
+    description = models.TextField("Ürün açıklaması", blank=True)
+    price = models.DecimalField("fiyat", max_digits=10, decimal_places=2)
+    available = models.BooleanField("mevcut mu?", default=True)
+    stock = models.PositiveIntegerField("stok miktarı",default = 100)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    image = models.ImageField(upload_to='products/%Y/%m/%d', blank=True)
+    image = models.ImageField("resim", upload_to='products/%Y/%m/%d', blank=True)
 
     class Meta:
         ordering = ('name', )
         index_together = (('id', 'slug'),)
+        verbose_name = 'Ürün'
+        verbose_name_plural = "Ürünler"
 
     def __str__(self):
         return self.name

@@ -25,7 +25,7 @@ SECRET_KEY = '4adlwdpf6krz)0lgbk)$_231ef5q)fc81g*z)aetr+ghi4(k(7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["eturnuva.pythonanywhere.com"]
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -132,6 +132,11 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
 	os.path.join(BASE_DIR, 'static')
 ]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
+
+
+
 AUTH_USER_MODEL = 'accounts.User'
 
 LOGIN_REDIRECT_URL = 'anasayfa:anasayfa'
