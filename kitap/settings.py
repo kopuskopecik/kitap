@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '4adlwdpf6krz)0lgbk)$_231ef5q)fc81g*z)aetr+ghi4(k(7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['eturnuva.pythonanywhere.com']
 
