@@ -20,11 +20,13 @@ from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
 
+from boards import views
 from accounts.views import StudentSignUpView, TeacherSignUpView, UserUpdateView, SignUpView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 	path('', include('anasayfa.urls')),
+	url(r'^boards/$', views.BoardListView.as_view(), name='home'),
     path('turnuva/', include('turnuva.urls')),
     #path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/signup/', SignUpView.as_view(), name='signup'),
@@ -62,6 +64,13 @@ urlpatterns = [
 	path('cart/', include('cart.urls')),
     path('orders/', include('orders.urls')),
     path('shop/', include('shop.urls')),
+	
+	url(r'^boards/(?P<pk>\d+)/$', views.TopicListView.as_view(), name='board_topics'),
+    url(r'^boards/(?P<pk>\d+)/new/$', views.new_topic, name='new_topic'),
+    url(r'^boards/(?P<pk>\d+)/topics/(?P<topic_pk>\d+)/$', views.PostListView.as_view(), name='topic_posts'),
+    url(r'^boards/(?P<pk>\d+)/topics/(?P<topic_pk>\d+)/reply/$', views.reply_topic, name='reply_topic'),
+    url(r'^boards/(?P<pk>\d+)/topics/(?P<topic_pk>\d+)/posts/(?P<post_pk>\d+)/edit/$',
+        views.PostUpdateView.as_view(), name='edit_post'),
 	
 	
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

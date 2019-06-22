@@ -25,8 +25,9 @@ SECRET_KEY = '4adlwdpf6krz)0lgbk)$_231ef5q)fc81g*z)aetr+ghi4(k(7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['eturnuva.pythonanywhere.com']
-#ALLOWED_HOSTS = []
+#ALLOWED_HOSTS = ["eturnuva.pythonanywhere.com"]
+ALLOWED_HOSTS = []
+
 
 # Application definition
 
@@ -38,14 +39,20 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+	'django.contrib.humanize',
 	
 	'widget_tweaks',
+	'django_cleanup',
+	'ckeditor',
+	'crispy_forms',
 	
 	'accounts',
 	'shop.apps.ShopConfig',
     'cart.apps.CartConfig',
     'orders.apps.OrdersConfig',
 	'turnuva',
+	'anasayfa',
+	'boards',
 	
 ]
 
@@ -132,6 +139,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
 	os.path.join(BASE_DIR, 'static')
 ]
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
 
 
@@ -147,3 +155,23 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'products/')
 
 CART_SESSION_ID = 'cart'
+
+CRISPY_TEMPLATE_PACK = "bootstrap4"
+
+CKEDITOR_jQUERY_URL = os.path.join(STATIC_URL, "js/jquery9.min.js")
+
+CKEDITOR_CONFIGS = {
+	'default': {
+		'toolbar': 'full',
+		'width':'100%',
+		'extraPlugins': '.'.join(
+		[ 
+			'codesnippet',
+		]),
+		'codeSnippet_languages': {
+			'python': 'Python',
+			'bash': "Bash",
+			'html': "HTML",
+		},
+	},
+}

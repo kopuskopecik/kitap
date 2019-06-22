@@ -3,3 +3,6 @@ Pillow==5.0.0
 
 django-widget-tweaks
 django-crispy-forms
+django_cleanup
+ckeditor
+crispy_forms

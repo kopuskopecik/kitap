@@ -1,6 +1,16 @@
 from django.db import models
 from django.urls import reverse
 
+STATUS_CHOICES = (
+    ('a', 15),
+    ('b', 20),
+    ('c', 25),
+	('d', 30),
+	('e', 35),
+	('f', 40),
+	('g', 45),
+)
+
 
 class Category(models.Model):
     name = models.CharField("kategori adı", max_length=150, db_index=True)
@@ -27,13 +37,14 @@ class Product(models.Model):
     description = models.TextField("Ürün açıklaması", blank=True)
     price = models.DecimalField("fiyat", max_digits=10, decimal_places=2)
     available = models.BooleanField("mevcut mu?", default=True)
+    ogrenci_sayisi = models.CharField(max_length=1, choices=STATUS_CHOICES)
     stock = models.PositiveIntegerField("stok miktarı",default = 100)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     image = models.ImageField("resim", upload_to='products/%Y/%m/%d', blank=True)
 
     class Meta:
-        ordering = ('name', )
+        ordering = ('ogrenci_sayisi', )
         index_together = (('id', 'slug'),)
         verbose_name = 'Ürün'
         verbose_name_plural = "Ürünler"

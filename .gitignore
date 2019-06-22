@@ -104,3 +104,4 @@ ENV/
 myvenv
 db.sqlite3
 staticfiles/
+products/

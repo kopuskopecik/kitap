@@ -13,7 +13,7 @@
   <body>
     {% block body %}
 
-      <nav class="navbar navbar-expand-md navbar navbar-dark bg-dark">
+      <nav class="navbar navbar-expand-md navbar-dark bg-dark">
         <div class="container-fluid">
 		  
           <a class="navbar-brand" href="{% url 'anasayfa:anasayfa' %}"> <img src="{% static 'img/logo.jpg' %}" width="40" height="30" class="d-inline-block align-top" alt="Logo"> Kitap Turnuvası</a>
@@ -25,7 +25,7 @@
 		  
 		    <ul class="navbar-nav ml-auto">
 				<li class="nav-item active">
-					<a class="nav-link" href="#">Hakkımızda<span class="sr-only">(current)</span></a>
+					<a class="nav-link" href="{% url 'home' %}">Forum</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="#">Sık Sorulan Sorular</a>
