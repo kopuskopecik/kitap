@@ -31,6 +31,9 @@
     </div>
   
   </div>
+  {% if forloop.counter|divisibleby:4 %}
+  <div class="w-100"></div>
+  {% endif %}
   {% endfor %} 
 </div>
 
