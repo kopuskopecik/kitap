@@ -2,6 +2,8 @@ from django import forms
 
 from .models import Post, Topic
 
+from ckeditor.fields import RichTextField
+
 
 class NewTopicForm(forms.ModelForm):
     message = forms.CharField(
