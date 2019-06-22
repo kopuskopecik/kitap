@@ -42,7 +42,7 @@ class Product(models.Model):
     stock = models.PositiveIntegerField("stok miktarı",default = 100)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    image = models.ImageField("resim", upload_to='products/%Y/%m/%d', blank=True)
+    image = models.ImageField("resim", upload_to='products/%Y/%m/%d', blank=True, null = True)
 
     class Meta:
         ordering = ('ogrenci_sayisi', )
