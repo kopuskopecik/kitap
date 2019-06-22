@@ -20,8 +20,8 @@
   <div class="card">
   
 	
-   <a href = "{{urun.get_absolute_url}}"> {% if urun.image %}<img class="card-img-top img-responsive" src="{{urun.image.url}}" alt="{{urun.name}}">
-	</a>{% endif %}
+   <a href = "{{urun.get_absolute_url}}"> {% if urun.image %}<img class="card-img-top img-responsive" src="{{urun.image.url}}" alt="{{urun.name}}">{% endif %}
+	</a>
     <div class="card-body text-center">
       <h5 class="card-title">{{urun.name}}</h5>
       <p class="card-text">{{urun.description}}</p>
