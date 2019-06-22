@@ -26,7 +26,7 @@ SECRET_KEY = '4adlwdpf6krz)0lgbk)$_231ef5q)fc81g*z)aetr+ghi4(k(7'
 DEBUG = True
 
 ALLOWED_HOSTS = ["eturnuva.pythonanywhere.com"]
-#ALLOWED_HOSTS = []
+ALLOWED_HOSTS = []
 
 
 # Application definition

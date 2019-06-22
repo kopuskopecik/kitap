@@ -2,13 +2,14 @@ from django.db import models
 from django.urls import reverse
 
 STATUS_CHOICES = (
-    ('a', 15),
-    ('b', 20),
-    ('c', 25),
-	('d', 30),
-	('e', 35),
-	('f', 40),
-	('g', 45),
+	('a', 10),
+    ('b', 15),
+    ('c', 20),
+    ('d', 25),
+	('e', 30),
+	('f', 35),
+	('g', 40),
+	('h', 45),
 )
 
 

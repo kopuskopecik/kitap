@@ -29,7 +29,7 @@
 {% for product in products %}
   <div class="card text-center mt-2 mb-2">
   
-    <a href = "{{product.get_absolute_url }}"><img class="card-img-top" src="{{product.image.url}}" alt="{{product.name}}"></a>
+    <a href = "{{product.get_absolute_url }}">{% if product.image %}<img class="card-img-top" src="{{product.image.url}}" alt="{{product.name}}">{% endif %}</a>
     <div class="card-body">
       <h5 class="card-title">{{product.name}}</h5>
       <p class="card-text">{{product.content}}</p>
