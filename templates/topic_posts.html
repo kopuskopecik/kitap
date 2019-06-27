@@ -37,6 +37,9 @@
                 <small class="text-muted">{{ post.created_at }}</small>
               </div>
 			  <div class = "col-12">
+			  {% if post.image %}
+			     <img src="{{post.image.url}}" class="img-fluid img-thumbnail mb-2" alt="Resim">
+			  {% endif %}
 				<p>{{post.message|safe}}</p>
 			  </div>
             </div>

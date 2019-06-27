@@ -54,6 +54,7 @@ class Topic(models.Model):
 
 class Post(models.Model):
     message = RichTextField(max_length=4000)
+    image = models.ImageField("Resim", blank=True)
     topic = models.ForeignKey(Topic, related_name='posts',on_delete=models.CASCADE, )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(null=True)

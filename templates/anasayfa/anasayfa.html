@@ -3,31 +3,45 @@
 
 {% block content %}
 
-
-
 <div class="card mb-3 text-center">
   <div class="card-header bg-danger text-white"><h5>ÜRÜN KATEGORİLERİMİZ</h5></div>
   <div class="card-body">
-    {% for category in object_list%}
+      {% for category in object_list%}
+		{% if forloop.counter <= 3 %}
+	  <a href = "{{category.get_absolute_url}}" type="button" class="btn btn-primary btn-lg btn-block">{{category.name}}</a>
+	  {% endif %}
+      {% if forloop.counter == 4 %}
 	  <a href = "{{category.get_absolute_url}}" type="button" class="btn btn-success btn-lg btn-block">{{category.name}}</a>
-    {% endfor %} 
+	  {% endif %}
+	  {% if forloop.counter == 5 %}
+	  <a href = "{{category.get_absolute_url}}" type="button" class="btn btn-danger btn-lg btn-block">{{category.name}}</a>
+	  {% endif %}
+	  {% if forloop.counter == 6 %}
+	  <a href = "{{category.get_absolute_url}}" type="button" class="btn btn-warning btn-lg btn-block">{{category.name}}</a>
+	  {% endif %}
+	  {% if forloop.counter == 7 %}
+	  <a href = "{{category.get_absolute_url}}" type="button" class="btn btn-info btn-lg btn-block">{{category.name}}</a>
+	  {% endif %}
+	
+	{% endfor %} 
   </div>
 </div>
 
 <div class="card-header bg-danger text-white text-center"><h5>ÜRÜNLERİMİZ</h5></div>
-<div class="card-group">
+<div class="card-deck">
 {% for urun in urunler%}
-  <div class="card">
+  <div class="card mt-4">
   
 	
-   <a href = "{{urun.get_absolute_url}}"> {% if urun.image %}<img class="card-img-top img-responsive" src="{{urun.image.url}}" alt="{{urun.name}}" style="height: 16rem;">{% endif %}
+   <a href = "{{urun.get_absolute_url}}"> {% if urun.image %}<img class="card-img-top img-responsive" src="{{urun.image.url}}" alt="{{urun.name}}">{% endif %}
 	</a>
     <div class="card-body text-center">
-      <h5 class="card-title">{{urun.name}}</h5>
+	<a href = "{{urun.get_nasil_url}}" type="button" class="btn btn-primary btn-sm btn-block ">Nasıl Uygulanır</a>
+      <h6 class="card-title">{{urun.name}}</h6>
       <p class="card-text">{{urun.description}}</p>
     </div>
     <div class="card-footer text-center">
-      <small class="text-muted">{{urun.price}}</small>
+      <small class="text-muted">{{urun.price}} TL</small>
     </div>
   
   </div>

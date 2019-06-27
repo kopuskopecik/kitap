@@ -12,7 +12,7 @@
 {% endblock %}
 
 {% block content %}
-  <form method="post" class="mb-4" novalidate>
+  <form method="post" enctype="multipart/form-data" class="mb-4" novalidate>
     {% csrf_token %}
     {% include 'includes/form.html' %}
     <button type="submit" class="btn btn-success">Kaydet</button>

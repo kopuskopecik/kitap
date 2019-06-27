@@ -105,7 +105,7 @@ def reply_topic(request, pk, topic_pk):
 @method_decorator(login_required, name='dispatch')
 class PostUpdateView(UpdateView):
     model = Post
-    fields = ('message', )
+    fields = ('message', 'image',)
     template_name = 'edit_post.html'
     pk_url_kwarg = 'post_pk'
     context_object_name = 'post'
