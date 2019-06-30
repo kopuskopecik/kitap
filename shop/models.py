@@ -48,6 +48,11 @@ class TekliResim(models.Model):
 	def __str__(self):
 		return self.isim
 		
+	class Meta:
+		ordering = ('isim', )
+		verbose_name = 'Resim'
+		verbose_name_plural = 'Resimler'
+		
 class Resim(models.Model):
 	isim = models.CharField("resim adı", max_length=100)
 	resimler = models.ManyToManyField(TekliResim, verbose_name = "resimler", blank=True)
