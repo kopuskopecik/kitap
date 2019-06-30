@@ -44,6 +44,9 @@ class AnaCategory(models.Model):
 class TekliResim(models.Model):
 	isim = models.CharField("resim adı", max_length=100)
 	image1 = models.ImageField("resim")
+	
+	def __str__(self):
+		return self.isim
 		
 class Resim(models.Model):
 	isim = models.CharField("resim adı", max_length=100)
