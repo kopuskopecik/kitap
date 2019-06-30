@@ -23,12 +23,12 @@ SAYFA_SAYISI = (
 
 class AnaCategory(models.Model):
 	name = models.CharField("kategori adı", max_length=150, db_index=True)
-	slug = models.SlugField("internet adresi",max_length=150, unique=True ,db_index=True)
-	sayfa_durumu = models.BooleanField("Sayfa Sayısı Var mı?")
-	bireysel_mi = models.BooleanField("Bireysel mi")
-	sadece_madalyalı_mı = models.BooleanField("Etkinliksiz madalyalı mı")
+	slug = models.SlugField("internet adresi",max_length=150, unique=True ,db_index=True, help_text = "Burası yalnızca site-dizaynı için. Dokunmayınız!")
+	sayfa_durumu = models.BooleanField("Sayfa Sayısı Var mı?", help_text = "1500-2500 gibi sayfa sayısı varsa işaretlenecek")
+	bireysel_mi = models.BooleanField("Bireysel mi", help_text = "Öğrencilerle beraber oynanMAyacaksa işaretlenecek!!!")
+	sadece_madalyalı_mı = models.BooleanField("Etkinliksiz madalyalı mı", help_text = "Herhangi bir oyun olmaksızın bir kategori ise işaretlenecek Örneğin; sadece madalya için")
 	sıralama_sayısı = models.PositiveIntegerField("Sıralama Sayısı")
-	aktif = models.BooleanField("Aktif mi?")
+	aktif = models.BooleanField("Aktif mi?", help_text="Sitede görünmesini istemiyorsanız işaretleyiniz!!!")
 	
 	class Meta:
 		ordering = ('sıralama_sayısı', )
