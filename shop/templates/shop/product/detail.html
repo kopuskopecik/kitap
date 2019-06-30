@@ -11,15 +11,16 @@
   <div class="card-header">
     {{product.category}}
   </div>
-  <img class="card-img-top" src="{{product.image.url}}" alt="Card image cap">
+  <img class="card-img-top" src="{{product.category.image1.url}}" alt="Card image cap">
   <div class="card-body">
-  <p>Öğrenci mevcudu Seçenekleri</p>
-	<div class="btn-group" role="group" aria-label="Basic example">
-	  
+  <a href = "{{product.get_nasil_url}}" type="button" class="btn btn-primary btn-sm btn-block ">Nasıl Uygulanır</a>
+  {% if product.category.ana_kategori.sayfa_durumu %}
+	<div class="btn-group mt-1" role="group" aria-label="Basic example">
 	  {% for product in products %}
-		<a href = "{{product.get_absolute_url}}"type="button" class="btn btn-sm btn-primary">{{product.get_ogrenci_sayisi_display}}</a>
+		<a href = "{{product.get_absolute_url}}"type="button" class="btn btn-success">{{product.get_ogrenci_sayisi_display}}</a>
 	  {% endfor %}
 	</div>
+  {% endif %}
     <h5 class="card-title">{{product.name}}</h5>
     <p class="card-text">{{product.description}}</p>
 	<form class = "form mx-auto" action="{% url 'cart:cart_add' product.id %}" method="post">

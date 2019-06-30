@@ -1,11 +1,11 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Category, Product
+from .models import Category, Product, AnaCategory
 from cart.forms import CartAddProductForm
 
 
 def product_list(request):
-    categories = Category.objects.all()
-    products = Product.objects.filter(available=True, ogrenci_sayisi = "b")
+    categories = AnaCategory.objects.all().order_by('sıralama_sayısı')
+    products = Product.objects.filter(ogrenci_sayisi = "c")
 
     ogrenci_sayısı = (
         ('a', 10),
@@ -27,8 +27,8 @@ def product_list(request):
     return render(request, 'shop/product/list.html', context)
 
 def product_filter_list(request, sayi):
-    categories = Category.objects.all()
-    products = Product.objects.filter(available=True, ogrenci_sayisi = sayi)
+    categories = AnaCategory.objects.all().order_by('sıralama_sayısı')
+    products = Product.objects.filter(ogrenci_sayisi = sayi)
 
     ogrenci_sayısı = (
         ('a', 10),
@@ -50,9 +50,9 @@ def product_filter_list(request, sayi):
     return render(request, 'shop/product/list.html', context)
 	
 def category_product_list(request, category_slug):
-    category = get_object_or_404(Category, slug=category_slug)
-    products = Product.objects.filter(category=category, ogrenci_sayisi = "b")
-    categories = Category.objects.all().exclude(slug = category_slug)
+    category = get_object_or_404(AnaCategory, slug=category_slug)
+    products = Product.objects.filter(category__ana_kategori=category, ogrenci_sayisi = "c")
+    categories = AnaCategory.objects.all().exclude(slug = category_slug).order_by('sıralama_sayısı')
 
     ogrenci_sayısı = (
         ('a', 10),
@@ -74,9 +74,9 @@ def category_product_list(request, category_slug):
     return render(request, 'shop/product/category_detail.html', context)
 
 def category_product_filter_list(request, category_slug, sayi):
-    category = get_object_or_404(Category, slug=category_slug)
-    products = Product.objects.filter(category=category, ogrenci_sayisi = sayi)
-    categories = Category.objects.all().exclude(slug = category_slug)
+    category = get_object_or_404(AnaCategory, slug=category_slug)
+    products = Product.objects.filter(category__ana_kategori=category, ogrenci_sayisi = sayi)
+    categories = AnaCategory.objects.all().exclude(slug = category_slug).order_by('sayi')
 
     ogrenci_sayısı = (
         ('a', 10),
@@ -100,10 +100,8 @@ def category_product_filter_list(request, category_slug, sayi):
 
 
 def product_detail(request, id, slug):
-	
-	
-    product = get_object_or_404(Product, id=id, slug=slug, available=True)
-    products = Product.objects.exclude(ogrenci_sayisi = product.ogrenci_sayisi).filter(category = product.category, odul = product.odul, sayfa_sayısı = product.sayfa_sayısı)
+    product = get_object_or_404(Product, id=id, slug=slug)
+    products = Product.objects.exclude(ogrenci_sayisi = product.ogrenci_sayisi).filter(category = product.category)
     cart_product_form = CartAddProductForm()
     context = {
 		'products': products,
@@ -115,10 +113,9 @@ def product_detail(request, id, slug):
 def product_detail_nasil_uygulanir(request, id, slug):
 	
 	
-    product = get_object_or_404(Product, id=id, slug=slug, available=True)
+    product = get_object_or_404(Product, id=id, slug=slug)
     context = {
         'product': product,
-        
     }
     return render(request, 'shop/product/nasil-detail.html', context)
 

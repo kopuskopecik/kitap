@@ -3,19 +3,22 @@ from django.views import generic
 
 from .models import Genel
 
-from shop.models import Category, Product
+from shop.models import Category, Product, AnaCategory
 
 
 class AnaSayfa(generic.ListView):
 	model = Category
 	template_name = 'anasayfa/anasayfa.html'
+	ordering = ('sayi',)
 	
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
 		urunler = Product.objects.filter(ogrenci_sayisi = "a")
 		genel = Genel.objects.all()
+		ana_kategoriler = AnaCategory.objects.order_by('sıralama_sayısı')
 		context["urunler"] = urunler
 		context["genel"] = genel
+		context["ana_kategoriler"] = ana_kategoriler
 		return context
 
 class GenelDetailView(generic.DetailView):

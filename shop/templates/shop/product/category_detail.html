@@ -10,15 +10,16 @@
 <div class="card text-center">
   <div class="card-header">
     <ul class="nav nav-pills card-header-pills">
+	{% if  category.ogrenci %}
 	  <li class="nav-item dropdown ml-2">
-		<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Öğrenci Sayısı</a>
+		<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Öğrenci Sayısı</a>	
 		<div class="dropdown-menu">
       {% for sayi in ogrenci_sayısı%}
 		<a class="dropdown-item" href="{% url 'shop:product_list__filter_by_category' category.slug sayi.0 %}">{{sayi.1}}</a>
 		{% endfor %}
 		</div>
 	  </li>   
-	  
+	 {% endif %} 
 	  
       <li class="nav-item dropdown ml-2">
 		<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Diğer Kategoriler</a>
@@ -42,8 +43,8 @@
   
     <a href = "{{product.get_absolute_url }}">  {% if product.image %} <img class="card-img-top img-responsive" src="{{product.image.url}}" alt="{{product.name}}">{% endif %}</a>
     <div class="card-body">
+	 <a href = "{{product.get_nasil_url}}" type="button" class="btn btn-primary btn-sm btn-block ">Nasıl Uygulanır</a>
       <h5 class="card-title">{{product.name}}</h5>
-      <p class="card-text">{{product.content}}</p>
     </div>
   
   <div class="card-footer">
