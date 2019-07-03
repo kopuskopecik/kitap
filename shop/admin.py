@@ -22,9 +22,9 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['name', 'slug', 'category', 'price', 'agırlık', 'ogrenci_sayisi',]
-    list_editable = ['category', 'price', 'agırlık', 'ogrenci_sayisi',]
-    list_filter = ['category', 'category__ana_kategori']
+    list_display = ['name', 'slug', 'category', 'anasayfada_gosterilsin_mi','price', 'agırlık', 'ogrenci_sayisi',]
+    list_editable = ['category', 'anasayfada_gosterilsin_mi','price', 'agırlık', 'ogrenci_sayisi',]
+    list_filter = ['category', 'category__ana_kategori', 'anasayfada_gosterilsin_mi']
     prepopulated_fields = {'slug': ('name',)}
 
 
