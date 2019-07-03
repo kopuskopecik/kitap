@@ -24,11 +24,11 @@ SAYFA_SAYISI = (
 class AnaCategory(models.Model):
 	name = models.CharField("kategori adı", max_length=150, db_index=True)
 	slug = models.SlugField("internet adresi",max_length=150, unique=True ,db_index=True, help_text = "Burası yalnızca site-dizaynı için. Dokunmayınız!")
-	sayfa_durumu = models.BooleanField("Sayfa Sayısı Var mı?", help_text = "1500-2500 gibi sayfa sayısı varsa işaretlenecek")
-	bireysel_mi = models.BooleanField("Bireysel mi", help_text = "Öğrencilerle beraber oynanMAyacaksa işaretlenecek!!!")
-	sadece_madalyalı_mı = models.BooleanField("Etkinliksiz madalyalı mı", help_text = "Herhangi bir oyun olmaksızın bir kategori ise işaretlenecek Örneğin; sadece madalya için")
+	sayfa_durumu = models.BooleanField("Sayfa Sayısı Var mı?", help_text = "1500-2500 gibi sayfa sayısı varsa işaretlenecek", default = False,)
+	bireysel_mi = models.BooleanField("Bireysel mi", help_text = "Öğrencilerle beraber oynanMAyacaksa işaretlenecek!!!", default = False,)
+	sadece_madalyalı_mı = models.BooleanField("Sadece Madalya mı", default = False, help_text = "Herhangi bir oyun olmaksızın bir kategori ise işaretlenecek Örneğin; sadece madalya için")
 	sıralama_sayısı = models.PositiveIntegerField("Sıralama Sayısı")
-	aktif = models.BooleanField("Aktif mi?", help_text="Sitede görünmesini istemiyorsanız işaretleyiniz!!!")
+	aktif = models.BooleanField("Aktif mi?", help_text="Sitede görünmesini istiyorsanız işaretleyiniz!!!", default = False,)
 	
 	class Meta:
 		ordering = ('sıralama_sayısı', )
@@ -73,7 +73,7 @@ class Category(models.Model):
     nasıl_uygulanır_resimleri = models.ForeignKey(Resim, on_delete=models.CASCADE, blank = True, null = True,verbose_name = "Nasıl Uygulanır Resimleri", related_name= "nasil")
     odul_buttonu_resimleri = models.ForeignKey(Resim, on_delete=models.CASCADE, blank = True, null = True, verbose_name = "Kişiye özel Ödül Butonu Resimleri", related_name = 'odul')
     sayi = models.PositiveIntegerField("Sıralama Sayısı")
-    madalyalı_mı = models.BooleanField("Madalyalı mı")
+    madalyalı_mı = models.BooleanField("Madalyalı mı", default = True)
     sayfa_sayısı = models.CharField('sayfa sayısı', max_length=1, choices=SAYFA_SAYISI)
     
 
@@ -97,6 +97,7 @@ class Product(models.Model):
     price = models.DecimalField("fiyat", max_digits=10, decimal_places=2)
     agırlık = models.PositiveIntegerField("Ağırlık",default = 0)
     ogrenci_sayisi = models.CharField(max_length=1, choices=STATUS_CHOICES)
+    anasayfada_gosterilsin_mi = models.BooleanField("AnaSayfada gösterilsin mi?", default = False, help_text = "Anasayfada gösterilmesi istenen ürünler için işaretlenecektir.")
 	
     class Meta:
         ordering = ('ogrenci_sayisi', )

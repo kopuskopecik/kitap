@@ -4,8 +4,8 @@ from cart.forms import CartAddProductForm
 
 
 def product_list(request):
-    categories = AnaCategory.objects.all().order_by('sıralama_sayısı')
-    products = Product.objects.filter(ogrenci_sayisi = "c")
+    categories = AnaCategory.objects.filter(aktif = True).order_by('sıralama_sayısı')
+    products = Product.objects.filter(category__ana_kategori__aktif = True)
 
     ogrenci_sayısı = (
         ('a', 10),
@@ -27,8 +27,8 @@ def product_list(request):
     return render(request, 'shop/product/list.html', context)
 
 def product_filter_list(request, sayi):
-    categories = AnaCategory.objects.all().order_by('sıralama_sayısı')
-    products = Product.objects.filter(ogrenci_sayisi = sayi)
+    categories = AnaCategory.objects.filter(aktif = True).order_by('sıralama_sayısı')
+    products = Product.objects.filter(category__ana_kategori__aktif = True)
 
     ogrenci_sayısı = (
         ('a', 10),
@@ -50,9 +50,9 @@ def product_filter_list(request, sayi):
     return render(request, 'shop/product/list.html', context)
 	
 def category_product_list(request, category_slug):
-    category = get_object_or_404(AnaCategory, slug=category_slug)
-    products = Product.objects.filter(category__ana_kategori=category, ogrenci_sayisi = "c")
-    categories = AnaCategory.objects.all().exclude(slug = category_slug).order_by('sıralama_sayısı')
+    category = get_object_or_404(AnaCategory, slug=category_slug, aktif = True)
+    products = Product.objects.filter(category__ana_kategori=category)
+    categories = AnaCategory.objects.exclude(slug = category_slug).filter(aktif = True).order_by('sıralama_sayısı')
 
     ogrenci_sayısı = (
         ('a', 10),
@@ -74,9 +74,9 @@ def category_product_list(request, category_slug):
     return render(request, 'shop/product/category_detail.html', context)
 
 def category_product_filter_list(request, category_slug, sayi):
-    category = get_object_or_404(AnaCategory, slug=category_slug)
+    category = get_object_or_404(AnaCategory, slug=category_slug, aktif = True)
     products = Product.objects.filter(category__ana_kategori=category, ogrenci_sayisi = sayi)
-    categories = AnaCategory.objects.all().exclude(slug = category_slug).order_by('sayi')
+    categories = AnaCategory.objects.exclude(slug = category_slug).filter(aktif =True).order_by('sıralama_sayısı')
 
     ogrenci_sayısı = (
         ('a', 10),
@@ -100,8 +100,11 @@ def category_product_filter_list(request, category_slug, sayi):
 
 
 def product_detail(request, id, slug):
-    product = get_object_or_404(Product, id=id, slug=slug)
-    products = Product.objects.exclude(ogrenci_sayisi = product.ogrenci_sayisi).filter(category = product.category)
+    product = get_object_or_404(Product, id=id, slug=slug, category__ana_kategori__aktif = True)
+    products = Product.objects.exclude(ogrenci_sayisi = product.ogrenci_sayisi).filter(category__ana_kategori = product.category.ana_kategori, category = product.category)
+    print("")
+    print(products)
+    print("")
     cart_product_form = CartAddProductForm()
     context = {
 		'products': products,

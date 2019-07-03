@@ -2,51 +2,89 @@
 {% load static %}
 
 {% block content %}
-
-<div class="card mb-3 text-center">
-  <div class="card-header bg-danger text-white"><h5>ÜRÜN KATEGORİLERİMİZ</h5></div>
-  <div class="card-body">
-      {% for category in ana_kategoriler%}
-		{% if forloop.counter <= 3 %}
-	  <a href = "{{category.get_absolute_url}}" type="button" class="btn btn-primary btn-sm btn-block">{{category.name}}</a>
-	  {% endif %}
-      {% if forloop.counter == 4 %}
-	  <a href = "{{category.get_absolute_url}}" type="button" class="btn btn-success btn-sm btn-block">{{category.name}}</a>
-	  {% endif %}
-	  {% if forloop.counter == 5 %}
-	  <a href = "{{category.get_absolute_url}}" type="button" class="btn btn-danger btn-sm btn-block">{{category.name}}</a>
-	  {% endif %}
-	  {% if forloop.counter == 6 %}
-	  <a href = "{{category.get_absolute_url}}" type="button" class="btn btn-warning btn-sm btn-block">{{category.name}}</a>
-	  {% endif %}
-	  {% if forloop.counter == 7 %}
-	  <a href = "{{category.get_absolute_url}}" type="button" class="btn btn-info btn-sm btn-block">{{category.name}}</a>
-	  {% endif %}
-	
-	{% endfor %} 
+<div class = "row">
+  <div class = "col-md-5 col-sm-12 sol">
+  <div class = "card">
+    <div class="card mb-2 text-center">
+      <div class="card-header bg-danger text-white py-0">ÜRÜN KATEGORİLERİMİZ</div>
+      <div class="card-body bg-secondary">
+        {% for category in ana_kategoriler%}
+		  {% if forloop.counter <= 3 %}
+	        <a href = "{{category.get_absolute_url}}" type="button" class="btn btn-primary btn-sm btn-block">{{category.name}}</a>
+	      {% endif %}
+          {% if forloop.counter == 4 %}
+	        <a href = "{{category.get_absolute_url}}" type="button" class="btn btn-success btn-sm btn-block">{{category.name}}</a>
+	      {% endif %}
+	      {% if forloop.counter == 5 %}
+	        <a href = "{{category.get_absolute_url}}" type="button" class="btn btn-danger btn-sm btn-block">{{category.name}}</a>
+	      {% endif %}
+	      {% if forloop.counter == 6 %}
+	        <a href = "{{category.get_absolute_url}}" type="button" class="btn btn-warning btn-sm btn-block">{{category.name}}</a>
+	      {% endif %}
+	      {% if forloop.counter == 7 %}
+	        <a href = "{{category.get_absolute_url}}" type="button" class="btn btn-info btn-sm btn-block">{{category.name}}</a>
+	      {% endif %}
+	   {% endfor %} 
+    </div>
+    </div>
+	<div class="card mb-2 text-center">
+      <div class="card-header bg-success text-white py-0">E-TURNUVA</div>
+      <div class="card-body bg-warning">
+	    <a href = "#" type="button" class="btn btn-info btn-sm btn-block">Eturnuva nedir?</a>
+		<a href = "#" type="button" class="btn btn-danger btn-sm btn-block">Eturnuva Nasıl Uygulanır?</a>
+		<a href = "#" type="button" class="btn btn-light btn-sm btn-block">Eturnuva Etkinlikleri?</a>
+		<a href = "#" type="button" class="btn btn-info btn-sm btn-block">Eturnuva nedir?</a>
+		<a href = "#" type="button" class="btn btn-danger btn-sm btn-block">Eturnuva Nasıl Uygulanır?</a>
+		<a href = "#" type="button" class="btn btn-light btn-sm btn-block">Eturnuva Etkinlikleri?</a>
+      </div>
+    </div>
   </div>
+  </div>
+  <div class = "col-md-7 sag">
+  <div class = "card h-100">
+    <div class="card-header bg-danger text-white text-center py-0">ÜRÜNLERİMİZ</div>
+	<div class = "row">	
+	{% for urun in urunler1%}
+      <div class = "col-md-6 col-sm-12">
+      <div class="card h-100">	
+        <a href = "{{urun.get_absolute_url}}"> {% if urun.category.image1 %}
+		  <img class="card-img-top img-responsive" src="{{urun.category.image1.url}}" alt="{{urun.name}}">{% endif %}
+	    </a>
+        <div class="card-body text-center">
+	      {% if not urun.category.ana_kategori.sadece_madalyalı_mı %}
+		  <a href = "{{urun.get_nasil_url}}" type="button" class="btn btn-primary btn-sm btn-block ">Nasıl Uygulanır</a>
+          {% endif %}
+		  <h6 class="card-title">{{urun.name}}</h6>
+       </div>
+       <div class="card-footer text-center">
+        <small class="text-muted">{{urun.price}} TL</small>
+       </div>
+     </div>
+	 </div>
+	 
+	 {% endfor %}
+  </div>
+  </div>
+   </div>
 </div>
-
-<div class="card-header bg-danger text-white text-center"><h5>ÜRÜNLERİMİZ</h5></div>
 <div class="card-deck">
-{% for urun in urunler%}
+{% for urun in urunler2%}
   <div class="card mt-4">
   
 	
    <a href = "{{urun.get_absolute_url}}"> {% if urun.category.image1 %}<img class="card-img-top img-responsive" src="{{urun.category.image1.url}}" alt="{{urun.name}}">{% endif %}
 	</a>
     <div class="card-body text-center">
+	{% if not urun.category.ana_kategori.sadece_madalyalı_mı %}
 	<a href = "{{urun.get_nasil_url}}" type="button" class="btn btn-primary btn-sm btn-block ">Nasıl Uygulanır</a>
-      <h6 class="card-title">{{urun.name}}</h6>
+    {% endif %}  
+	  <h6 class="card-title">{{urun.name}}</h6>
     </div>
     <div class="card-footer text-center">
       <small class="text-muted">{{urun.price}} TL</small>
     </div>
   
   </div>
-  {% if forloop.counter|divisibleby:4 %}
-  <div class="w-100"></div>
-  {% endif %}
   {% endfor %} 
 </div>
 

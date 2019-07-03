@@ -13,7 +13,9 @@
   </div>
   <img class="card-img-top" src="{{product.category.image1.url}}" alt="Card image cap">
   <div class="card-body">
+  {% if not product.category.ana_kategori.sadece_madalyalı_mı %}
   <a href = "{{product.get_nasil_url}}" type="button" class="btn btn-primary btn-sm btn-block ">Nasıl Uygulanır</a>
+  {% endif %}
   {% if product.category.ana_kategori.sayfa_durumu %}
 	<div class="btn-group mt-1" role="group" aria-label="Basic example">
 	  {% for product in products %}

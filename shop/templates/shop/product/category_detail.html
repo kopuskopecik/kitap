@@ -10,7 +10,7 @@
 <div class="card text-center">
   <div class="card-header">
     <ul class="nav nav-pills card-header-pills">
-	{% if  category.ogrenci %}
+	{% if not category.bireysel_mi %}
 	  <li class="nav-item dropdown ml-2">
 		<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Öğrenci Sayısı</a>	
 		<div class="dropdown-menu">
@@ -37,24 +37,25 @@
   </div>
 </div>
  
-<div class="card-deck">
-{% for product in products %}
-  <div class="card text-center mt-2 mb-2">
-  
-    <a href = "{{product.get_absolute_url }}">  {% if product.image %} <img class="card-img-top img-responsive" src="{{product.image.url}}" alt="{{product.name}}">{% endif %}</a>
-    <div class="card-body">
-	 <a href = "{{product.get_nasil_url}}" type="button" class="btn btn-primary btn-sm btn-block ">Nasıl Uygulanır</a>
-      <h5 class="card-title">{{product.name}}</h5>
-    </div>
-  
-  <div class="card-footer">
-      <small class="text-muted">{{product.price}} tl</small>
-  </div>
-  </div>
-  
-  {% if forloop.counter|divisibleby:4 %}
-  <div class="w-100"></div>
-  {% endif %}
-  {% endfor %}
-</div>
+ <div class = "row">
+  {% for product in products %}
+   <div class = "col-md-3 col-sm-4 mt-2 mb-2">
+       <div class="card text-center h-100">  
+         <a href = "{{product.get_absolute_url }}">{% if product.category.image1 %}
+		   <img class="card-img-top img-responsive" src="{{product.category.image1.url}}" alt="{{product.name}}">{% endif %}
+		 </a>
+         <div class="card-body">
+		   {% if not product.category.ana_kategori.sadece_madalyalı_mı %}
+	       <a href = "{{product.get_nasil_url}}" type="button" class="btn btn-primary btn-sm btn-block ">Nasıl Uygulanır</a>
+           {% endif %}
+           <h5 class="card-title">{{product.name}}</h5>
+           <p class="card-text">{{product.content}}</p>
+         </div>  
+        <div class="card-footer">
+          <small class="text-muted">{{product.price}} TL</small>
+        </div>
+       </div>
+   </div>
+  {% endfor %} 
+ </div>
 {% endblock %}
