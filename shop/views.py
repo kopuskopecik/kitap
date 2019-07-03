@@ -8,14 +8,14 @@ def product_list(request):
     products = Product.objects.filter(category__ana_kategori__aktif = True)
 
     ogrenci_sayısı = (
-        ('a', 10),
-        ('b', 15),
-        ('c', 20),
-        ('d', 25),
-        ('e', 30),
-        ('f', 35),
-        ('g', 40),
-        ('h', 45),
+		('b', 10),
+		('c', 15),
+		('d', 20),
+		('e', 25),
+		('f', 30),
+		('g', 35),
+		('h', 40),
+		('i', 45),
     )	
 	
 
@@ -31,14 +31,14 @@ def product_filter_list(request, sayi):
     products = Product.objects.filter(category__ana_kategori__aktif = True)
 
     ogrenci_sayısı = (
-        ('a', 10),
-        ('b', 15),
-        ('c', 20),
-        ('d', 25),
-        ('e', 30),
-        ('f', 35),
-        ('g', 40),
-        ('h', 45),
+		('b', 10),
+		('c', 15),
+		('d', 20),
+		('e', 25),
+		('f', 30),
+		('g', 35),
+		('h', 40),
+		('i', 45),
     )	
 
 
@@ -55,14 +55,14 @@ def category_product_list(request, category_slug):
     categories = AnaCategory.objects.exclude(slug = category_slug).filter(aktif = True).order_by('sıralama_sayısı')
 
     ogrenci_sayısı = (
-        ('a', 10),
-        ('b', 15),
-        ('c', 20),
-        ('d', 25),
-        ('e', 30),
-        ('f', 35),
-        ('g', 40),
-        ('h', 45),
+		('b', 10),
+		('c', 15),
+		('d', 20),
+		('e', 25),
+		('f', 30),
+		('g', 35),
+		('h', 40),
+		('i', 45),
     )
 
     context = {
@@ -79,14 +79,14 @@ def category_product_filter_list(request, category_slug, sayi):
     categories = AnaCategory.objects.exclude(slug = category_slug).filter(aktif =True).order_by('sıralama_sayısı')
 
     ogrenci_sayısı = (
-        ('a', 10),
-        ('b', 15),
-        ('c', 20),
-        ('d', 25),
-        ('e', 30),
-        ('f', 35),
-        ('g', 40),
-        ('h', 45),
+		('b', 10),
+		('c', 15),
+		('d', 20),
+		('e', 25),
+		('f', 30),
+		('g', 35),
+		('h', 40),
+		('i', 45),
     )
 
     context = {
