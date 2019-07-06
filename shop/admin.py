@@ -15,16 +15,16 @@ class AnaCategoryAdmin(admin.ModelAdmin):
 	
 class CategoryAdmin(admin.ModelAdmin):
 		
-	list_display = ['name', 'ana_kategori', 'sayi', 'image1', 'nasıl_uygulanır_resimleri', 'odul_buttonu_resimleri', 'madalyalı_mı', 'sayfa_sayısı',]
-	list_editable = ['ana_kategori', 'sayi', 'image1', 'nasıl_uygulanır_resimleri', 'odul_buttonu_resimleri', 'madalyalı_mı', 'sayfa_sayısı',]
+	list_display = ['name', 'ana_kategori', 'sayi', 'image1', 'nasıl_uygulanır_resimleri', 'odul_buttonu_resimleri', 'madalyalı_mı', 'sayfa_sayısı','aktif']
+	list_editable = ['ana_kategori', 'sayi', 'image1', 'nasıl_uygulanır_resimleri', 'odul_buttonu_resimleri', 'madalyalı_mı', 'sayfa_sayısı','aktif']
 	prepopulated_fields = {'slug': ('name',)}
-	list_filter = ['ana_kategori', ]
+	list_filter = ['ana_kategori', 'aktif']
 
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['name', 'slug', 'category', 'anasayfada_gosterilsin_mi','price', 'agırlık', 'ogrenci_sayisi',]
-    list_editable = ['category', 'anasayfada_gosterilsin_mi','price', 'agırlık', 'ogrenci_sayisi',]
-    list_filter = ['category', 'category__ana_kategori', 'anasayfada_gosterilsin_mi']
+    list_display = ['name', 'slug', 'category', 'anasayfada_gosterilsin_mi','price', 'agırlık', 'ogrenci_sayisi','aktif']
+    list_editable = ['category', 'anasayfada_gosterilsin_mi','price', 'agırlık', 'ogrenci_sayisi', 'aktif']
+    list_filter = ['category', 'category__ana_kategori', 'anasayfada_gosterilsin_mi', 'aktif']
     prepopulated_fields = {'slug': ('name',)}
 
 

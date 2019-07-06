@@ -28,7 +28,7 @@ class AnaCategory(models.Model):
 	bireysel_mi = models.BooleanField("Bireysel mi", help_text = "Öğrencilerle beraber oynanMAyacaksa işaretlenecek!!!", default = False,)
 	sadece_madalyalı_mı = models.BooleanField("Sadece Madalya mı", default = False, help_text = "Herhangi bir oyun olmaksızın bir kategori ise işaretlenecek Örneğin; sadece madalya için")
 	sıralama_sayısı = models.PositiveIntegerField("Sıralama Sayısı")
-	aktif = models.BooleanField("Aktif mi?", help_text="Sitede görünmesini istiyorsanız işaretleyiniz!!!", default = False,)
+	aktif = models.BooleanField("Aktif mi?", help_text="Sitede görünmesini istiyorsanız işaretleyiniz!!!", default = False)
 	
 	class Meta:
 		ordering = ('sıralama_sayısı', )
@@ -75,6 +75,7 @@ class Category(models.Model):
     sayi = models.PositiveIntegerField("Sıralama Sayısı")
     madalyalı_mı = models.BooleanField("Madalyalı mı", default = True)
     sayfa_sayısı = models.CharField('sayfa sayısı', max_length=1, choices=SAYFA_SAYISI)
+    aktif = models.BooleanField("Aktif mi?", help_text="Sitede görünmesini istiyorsanız işaretleyiniz!!!", default = False)
     
 
     class Meta:
@@ -95,10 +96,10 @@ class Product(models.Model):
     slug = models.SlugField("internet adresi",max_length=100, db_index=True)
     description = RichTextField("Ürün açıklaması", blank=True)
     price = models.DecimalField("fiyat", max_digits=10, decimal_places=2)
-    agırlık = models.PositiveIntegerField("Ağırlık",default = 0)
+    agırlık = models.FloatField("Ağırlık",default = 0)
     ogrenci_sayisi = models.CharField(max_length=1, choices=STATUS_CHOICES)
     anasayfada_gosterilsin_mi = models.BooleanField("AnaSayfada gösterilsin mi?", default = False, help_text = "Anasayfada gösterilmesi istenen ürünler için işaretlenecektir.")
-	
+    aktif = models.BooleanField("Aktif mi?", help_text="Sitede görünmesini istiyorsanız işaretleyiniz!!!", default = False)
     class Meta:
         ordering = ('ogrenci_sayisi', )
         index_together = (('id', 'slug'),)

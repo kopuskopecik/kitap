@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Genel
+from .models import Genel, RenkFont
 
 class GenelAdmin(admin.ModelAdmin):
     list_display = ['başlık', 'image',]
@@ -8,3 +8,4 @@ class GenelAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Genel, GenelAdmin)
+admin.site.register(RenkFont)

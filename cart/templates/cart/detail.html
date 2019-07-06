@@ -7,7 +7,7 @@
 {% block content %}
 
 {% with totail_items=cart|length %}
-  <h2 class = "table-bordered bg-dark text-white text-center mb-0 mt-3">
+  <h2 class = "table-bordered bg-primary text-white text-center mb-0 mt-3">
   {% if cart|length > 0 %}
 	Sepetiniz
   {% else %}
@@ -15,13 +15,14 @@
   {% endif %}
 {% endwith %}
   </h2>
-<table class="table table-hover table-bordered table-dark table-responsive-sm">
+<table class="table table-hover table-bordered table-warning table-responsive-sm">
   <thead>
     <tr>
       <th scope="col">Resim</th>
       <th scope="col">Ürün</th>
       <th scope="col">Miktar</th>
       <th scope="col">Sil</th>
+	  <th scope="col">Ağırlık</th>
 	  <th scope="col">Birim Fiyat</th>
 	  <th scope="col">Toplam Fiyat</th>
     </tr>
@@ -47,15 +48,26 @@
     <td>
       <a class = "btn btn-danger btn-sm" href="{% url 'cart:cart_remove' product.id %}">Kaldır</a>
     </td>
-    <td>{{ item.price }} tl</td>
-    <td>{{ item.total_price }} tl</td>
+	<td>{{ item.total_agırlık }} desi</td>
+    <td>{{ item.price }} TL</td>
+    <td>{{ item.total_price }} TL</td>
   </tr>
 {% endwith %}
 {% endfor %}
-  <tr class = "bg-success">
+<tr class = "bg-danger">
+    <td><b>Kargo ücreti</b></td>
+    <td colspan="5"></td>
+    <td colspan="num"><b>{{ cart.get_total_kargo }} TL</b></td>
+  </tr>
+  <tr class = "bg-warning">
+    <td><b>Ürünlerin Toplam Fiyatı</b></td>
+    <td colspan="5"></td>
+    <td colspan="num"><b>{{ cart.get_total_price }} TL</b></td>
+  </tr>
+    <tr class = "bg-success">
     <td><b>Toplam</b></td>
-    <td colspan="4"></td>
-    <td colspan="num"><b>{{ cart.get_total_price }} tl</b></td>
+    <td colspan="5"></td>
+    <td colspan="num"><b>{{ cart.get_total_bedel }} TL</b></td>
   </tr>
   </tbody>
 </table>
