@@ -5,18 +5,25 @@
 {% endblock %}
 
 {% block content %}
-<div class="row justify-content-md-center">
-<div class = "col-md-5">
-<div class="card text-center mt-3">
+<div class="row justify-content-md-center justify-content-sm-center">
+<div class = "col-md-4 col-lg-4 col-sm-6">
+<div class="card text-center mt-3 border border-white">
   <div class="card-header">
     {{product.category.ana_kategori.name}}
   </div>
-  <img class="card-img-top" src="{{product.category.image1.url}}" alt="Card image cap">
+  <img class="card-img-top img-responsive detail-resim" src="{{product.category.image1.url}}" alt="Card image cap">
+    <div class="card-footer py-1 bg-light">
+          <small class="font-weight-bold">{{product.price}} TL</small>
+	  {% if not product.category.ana_kategori.indirim_miktarı == 0 %}
+	  <small class="text-muted"><s>{{product.pahalı_fiyat_hesapla}} TL </s></small>
+	  {% endif %}
+    </div>
   <div class="card-body">
   {% if not product.category.ana_kategori.sadece_madalyalı_mı %}
-  <a href = "{{product.get_nasil_url}}" type="button" class="btn btn-primary btn-sm btn-block ">Nasıl Uygulanır</a>
+  <a href = "{{product.get_nasil_url}}" type="button" class="btn btn-primary btn-sm btn-block w-50 mx-auto mb-2">Nasıl Uygulanır?</a>
   {% endif %}
   {% if product.category.ana_kategori.sayfa_durumu %}
+  <p class = "mb-0">Öğrenci Sayısı</p>
 	<div class="btn-group mt-1" role="group" aria-label="Basic example">
 	  {% for product in products %}
 		<a href = "{{product.get_absolute_url}}"type="button" class="btn btn-success">{{product.get_ogrenci_sayisi_display}}</a>
@@ -24,16 +31,15 @@
 	</div>
   {% endif %}
     <h5 class="card-title">{{product.name}}</h5>
-    <p class="card-text">{{product.description|safe}}</p>
-	<form class = "form mx-auto" action="{% url 'cart:cart_add' product.id %}" method="post">
+	<form class = "form-inline justify-content-center" action="{% url 'cart:cart_add' product.id %}" method="post">
     {% csrf_token %}
       {% include 'includes/form3.html' %}
       <input type="submit" value="Sepete Ekle" class="btn btn-sm btn-primary ml-2">
     </form>
   </div>
-  <div class="card-footer text-muted">
-    {{product.price}} tl
-  </div>
+
+  <div class = "car-header bg-danger text-white">Açıklama</div>
+  <div class="card-text text-left mt-2">{{product.description|safe}}</div>
 </div>
 </div>
 </div>

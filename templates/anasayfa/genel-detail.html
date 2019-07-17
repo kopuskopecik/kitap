@@ -7,11 +7,22 @@
 
 {% block content %}
 
-<div class="card border-info mb-3 text-center">
+<div class="card border-info mb-3">
   <div class="card-header">{{object.başlık}}</div>
   <div class="card-body text-info">
     <p class="card-text">{{object.uzun_içerik|safe}}</p>
+  {% if object.resim_grubu %}
+  <div class = "text-center">
+	{% for resim in object.resim_grubu.resimler.all %}
+		<img src="{{resim.image1.url}}" class="img-fluid img-thumbnail mb-2" alt="{{resim.isim}}">
+	  {% endfor %}
+  </div>	  
+  {% endif %}	  
   </div>
 </div>
 
 {% endblock %}
+
+{% for resim in product.category.nasıl_uygulanır_resimleri.resimler.all %}
+		<img src="{{resim.image1.url}}" class="img-fluid img-thumbnail mb-2" alt="{{resim.isim}}">
+	  {% endfor %}

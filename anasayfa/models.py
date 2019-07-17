@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from ckeditor.fields import RichTextField
+from shop.models import Resim
 
 FONT_RENKLERİ = (
 
@@ -18,6 +19,12 @@ FONT_RENKLERİ = (
 ("text-black-50", "ince siyah"),
 ("text-white-50", "kalın gri"),
 
+)
+
+OKULLAR = (
+
+    ("İlkokul", "İlkokul"),
+    ("Ortaokul", "Ortaokul"),
 )
 
 ARKA_PLAN_RENKLERİ = (
@@ -65,7 +72,7 @@ FONT_SIZE = (
 class Genel(models.Model):
 	başlık = models.CharField(max_length= 100)
 	slug = models.SlugField(unique=True, max_length=130)
-	image = models.ImageField("resim", blank=True, null = True)
+	resim_grubu = models.ForeignKey(Resim, on_delete=models.CASCADE, blank = True , null = True, verbose_name = "Resim grubu", related_name= "resim_grubu")
 	kısa_içerik = RichTextField()
 	uzun_içerik = RichTextField()
 	
@@ -94,6 +101,7 @@ class RenkFont(models.Model):
 	beşinci_button = models.CharField("ürün kategorilerindeki beşinci button'un rengi", max_length=30, choices=BUTTON_RENKLERİ, blank = True)
 	altıncı_button = models.CharField("ürün kategorilerindeki altıncı button'un rengi", max_length=30, choices=BUTTON_RENKLERİ, blank = True)
 	yedinci_button = models.CharField("ürün kategorilerindeki yedinci button'un rengi", max_length=30, choices=BUTTON_RENKLERİ, blank = True)
+	sekizinci_button = models.CharField("ürün kategorilerindeki sekizinci button'un rengi", max_length=30, choices=BUTTON_RENKLERİ, blank = True)
 	buttonlar_yazı_büyüklüğü = models.CharField('Kategori isimlerinin yazı büyüklğü', max_length=30, choices=FONT_SIZE, blank = True)
 	isim = models.CharField(max_length= 50, default = "Site Geneli Özellikler")
 	navbardaki_yazı = models.CharField("Navbardaki yazı", max_length= 250, default = "KİTAP OKUMA HEDEFİNİZE PLANLI ÇÖZÜM")
@@ -106,5 +114,54 @@ class RenkFont(models.Model):
 	
 	def __str__(self):
 		return self.isim
+        
+class Slayt(models.Model):
+    isim = models.CharField("Başlık", max_length= 50)
+    yazı = models.CharField("Yazı", max_length= 200)
+    image = models.ImageField("resim", blank=True, null = True)
+    aktif = models.BooleanField("Aktif mi?", help_text="Sitede görünmesini istiyorsanız işaretleyiniz!!!", default = False)
+    sıralama_sayısı = models.PositiveIntegerField("Anasayfa Sıralama Sayısı", default = 0)
+
+    def __str__(self):
+        return self.isim
+
+    class Meta:
+        verbose_name = 'Slayt-Resmi'
+        verbose_name_plural = 'Slayt-Resimleri'
+        ordering = ['sıralama_sayısı']
+
+class Yorum(models.Model):
+    isim = models.CharField("Kullanıcı Adı:", max_length= 50)
+    okul = models.CharField('Okulunuz:', max_length=30, choices= OKULLAR)
+    content = models.TextField("Yorum:")
+    aktif = models.BooleanField("Aktif mi?", help_text="Sitede görünmesini istiyorsanız işaretleyiniz!!!", default = False)
+    created_at = models.DateTimeField("Oluşturulma tarihi", auto_now_add=True)
+    
+    class Meta:
+        verbose_name = 'Yorum'
+        verbose_name_plural = 'Yorumlar'
+        ordering = ['-created_at',]
+
+    def __str__(self):
+        return self.isim
+    
+    def get_absolute_url(self):
+        return reverse('anasayfa:ziyaret')
+
+class Dokuman(models.Model):
+    isim = models.CharField("Doküman Adı:", max_length= 50)
+    slug = models.SlugField(unique=True, max_length=130)
+    dokuman_ekle = models.FileField("doküman yükle")
+    
+    class Meta:
+        verbose_name = 'Doküman'
+        verbose_name_plural = 'Dokümanlar'
+
+    def __str__(self):
+        return self.isim
+
+    def get_absolute_url(self):
+        return reverse('anasayfa:dokuman-detail', kwargs={'slug':self.slug})
+    
 
 	

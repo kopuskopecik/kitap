@@ -6,7 +6,7 @@
 
 {% block content %}
 <div class="card mb-3 text-center">
-<div class="card-header bg-danger text-white"><h5>{{product.name}} <br>NASIL UYGULANIR</h5></div>
+<div class="card-header bg-danger text-white"><h5>{{product.name}} <br>NASIL UYGULANIR?</h5></div>
 {% if product.category.nasıl_uygulanır_resimleri %}
 	
 	  {% for resim in product.category.nasıl_uygulanır_resimleri.resimler.all %}

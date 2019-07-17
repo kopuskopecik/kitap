@@ -1,6 +1,7 @@
 from decimal import Decimal
 from django.conf import settings
 from shop.models import Product
+from .models import Kargo
 
 
 class Cart(object):
@@ -52,35 +53,35 @@ class Cart(object):
 	
     def get_total_kargo(self):
         toplam_agırlık = sum(Decimal(item['agırlık']) * item['quantity'] for item in self.cart.values())
-        if  0 <= toplam_agırlık < 1:
-            return 6
-        if  1 <= toplam_agırlık < 5:
-            return 8
-        if  5 <= toplam_agırlık < 10:
-            return 10
-        if  10 <= toplam_agırlık < 20:
-            return 15
-        if  20 <= toplam_agırlık < 30:
-            return 20
-        if  30 <= toplam_agırlık < 50:
-            return 30
-        if  50 <= toplam_agırlık < 70:
-            return 50
-        if  70 <= toplam_agırlık < 85:
-            return 60
-        if  85 <= toplam_agırlık < 100:
-            return 70
-        if  100 <= toplam_agırlık < 125:
-            return 80
-        if  125 <= toplam_agırlık < 150:
-            return 100
-        if  150 <= toplam_agırlık < 175:
-            return 150
-        if  175 <= toplam_agırlık < 200:
-            return 200
-        if  200 <= toplam_agırlık :
-            return 250
-        return sum(Decimal(item['agırlık']) * item['quantity'] for item in self.cart.values())
+        kargo = Kargo.objects.first()
+        if  kargo.agırlık1 <= toplam_agırlık < kargo.agırlık2:
+            return kargo.fiyat1
+        if  kargo.agırlık2 <= toplam_agırlık < kargo.agırlık3:
+            return kargo.fiyat2
+        if  kargo.agırlık3 <= toplam_agırlık < kargo.agırlık4:
+            return kargo.fiyat3
+        if  kargo.agırlık4 <= toplam_agırlık < kargo.agırlık5:
+            return kargo.fiyat4
+        if  kargo.agırlık5 <= toplam_agırlık < kargo.agırlık6:
+            return kargo.fiyat5
+        if  kargo.agırlık6 <= toplam_agırlık < kargo.agırlık7:
+            return kargo.fiyat6
+        if  kargo.agırlık7 <= toplam_agırlık < kargo.agırlık8:
+            return kargo.fiyat7
+        if  kargo.agırlık8 <= toplam_agırlık < kargo.agırlık9:
+            return kargo.fiyat8
+        if  kargo.agırlık9 <= toplam_agırlık < kargo.agırlık10:
+            return kargo.fiyat9
+        if  kargo.agırlık10 <= toplam_agırlık < kargo.agırlık11:
+            return kargo.fiyat10
+        if  kargo.agırlık11 <= toplam_agırlık < kargo.agırlık12:
+            return kargo.fiyat11
+        if  kargo.agırlık12 <= toplam_agırlık < kargo.agırlık13:
+            return kargo.fiyat12
+        if  kargo.agırlık13 <= toplam_agırlık < kargo.agırlık14:
+            return kargo.fiyat13
+        if  kargo.agırlık14 <= toplam_agırlık :
+            return kargo.fiyat14
 	
     def get_total_bedel(self):
         return self.get_total_price() + self.get_total_kargo()
@@ -88,3 +89,7 @@ class Cart(object):
     def clear(self):
         del self.session[settings.CART_SESSION_ID]
         self.session.modified = True
+        
+    def odeme_bedeli(self):
+        kargo = Kargo.objects.first()
+        return kargo.bankacılık_bedeli

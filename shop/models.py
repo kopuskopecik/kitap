@@ -29,6 +29,7 @@ class AnaCategory(models.Model):
 	sadece_madalyalı_mı = models.BooleanField("Sadece Madalya mı", default = False, help_text = "Herhangi bir oyun olmaksızın bir kategori ise işaretlenecek Örneğin; sadece madalya için")
 	sıralama_sayısı = models.PositiveIntegerField("Sıralama Sayısı")
 	aktif = models.BooleanField("Aktif mi?", help_text="Sitede görünmesini istiyorsanız işaretleyiniz!!!", default = False)
+	indirim_miktarı = models.PositiveIntegerField("İndirim miktarı", default = 0)
 	
 	class Meta:
 		ordering = ('sıralama_sayısı', )
@@ -40,6 +41,8 @@ class AnaCategory(models.Model):
 	
 	def get_absolute_url(self):
 		return reverse('shop:product_list_by_category', args=[self.slug])
+    
+	
 
 class TekliResim(models.Model):
 	isim = models.CharField("resim adı", max_length=100)
@@ -66,7 +69,7 @@ class Resim(models.Model):
 		return self.isim
 
 class Category(models.Model):
-    ana_kategori = models.ForeignKey(AnaCategory, on_delete=models.CASCADE, verbose_name = "Ana Kategori")
+    ana_kategori = models.ForeignKey(AnaCategory, on_delete=models.CASCADE, verbose_name = "Ana Kategori", related_name = "altkategoriler")
     name = models.CharField("kategori adı", max_length=150, db_index=True)
     slug = models.SlugField("internet adresi",max_length=150, unique=True ,db_index=True)
     image1 = models.ImageField("Kategori Resmi", blank=True, null = True)
@@ -91,29 +94,39 @@ class Category(models.Model):
 
 
 class Product(models.Model):
-    category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE, verbose_name = "kategori")
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name = "kategori")
     name = models.CharField("ürün adı", max_length=100, db_index=True)
     slug = models.SlugField("internet adresi",max_length=100, db_index=True)
     description = RichTextField("Ürün açıklaması", blank=True)
-    price = models.DecimalField("fiyat", max_digits=10, decimal_places=2)
+    price = models.DecimalField("gerçek fiyat", max_digits=10, decimal_places=2)
+    degisiklik = models.IntegerField("degisiklik", default = 0)
     agırlık = models.FloatField("Ağırlık",default = 0)
     ogrenci_sayisi = models.CharField(max_length=1, choices=STATUS_CHOICES)
     anasayfada_gosterilsin_mi = models.BooleanField("AnaSayfada gösterilsin mi?", default = False, help_text = "Anasayfada gösterilmesi istenen ürünler için işaretlenecektir.")
     aktif = models.BooleanField("Aktif mi?", help_text="Sitede görünmesini istiyorsanız işaretleyiniz!!!", default = False)
+    sıralama_sayısı = models.PositiveIntegerField("Anasayfa Sıralama Sayısı", default = 0)
+    
     class Meta:
-        ordering = ('ogrenci_sayisi', )
+        ordering = ('sıralama_sayısı', 'ogrenci_sayisi', )
         index_together = (('id', 'slug'),)
         verbose_name = 'Ürün'
         verbose_name_plural = "Ürünler"
 
     def __str__(self):
         return self.name
+    
+    #def pahalı_fiyat_hesapla(self):
+     #   self.pahalı_fiyat = self.price + self.category.ana_kategori.indirim_miktarı
+      #  self.save()
 
     def get_absolute_url(self):
         return reverse('shop:product_detail', args=[self.id, self.slug])
 	
     def get_nasil_url(self):
         return reverse('shop:nasil', args=[self.id, self.slug])
-		
+	
+    def pahalı_fiyat_hesapla(self):
+        return self.category.ana_kategori.indirim_miktarı + self.price + self.degisiklik
+        
 
 	

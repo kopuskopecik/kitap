@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+  {% block content %}
+ 
+ 
+ <h3>Adres</h3>
+ <address>
+ Hamdibey Mahallesi, İnönü Cd. No:70, 17200 Biga/Çanakkale, Türkiye.
+
+WhatsApp : 0505 763 63 81
+ </address>
+ 
+ <h4 class = "text-center">  Sık Sorulan Sorular</h4>
+ <div class="row">
+  <div class="col-6 border-right">
+    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+      <a class="nav-link active rounded-pill" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Yapmış olduğumuz alışverişlerimiz ne zaman teslim edilir ?</a>
+      <a class="nav-link rounded-pill" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Hangi ödeme yöntemleri web mağazamızda kabul edilir ?</a>
+      <a class="nav-link rounded-pill" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Satışı yapılan ürünlerin fatura ve garantisi varmıdır ?</a>
+      <a class="nav-link rounded-pill" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Siparişim hangi kargo ile teslim edilecek ?</a>
+    </div>
+  </div>
+  <div class="col-6">
+    <div class="tab-content" id="v-pills-tabContent">
+      <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+	 
+	  Siparişleriniz 1-5 iş günü içerisinde kargoya teslim edilir.
+	  
+	  </div>
+      <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+	  EFT'li Ödeme – Kapıda Ödeme - Tek Çekim Kapıda Kredi Kartı Ödeme
+	  </div>
+      <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+	  Tüm ürünlerimiz fatura ile gönderilmektedir. Madalyalarımız 5 yıl garantilidir. Herhangi bir problemde çözüm üretilir.
+	  </div>
+      <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+	  Siparişleriniz Yurtiçi Kargo ile kapıda ödeme şeklinde teslim edilmektedir.</div>
+    </div>
+  </div>
+</div>
+ 
+ {% endblock %}

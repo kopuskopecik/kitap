@@ -5,24 +5,25 @@
 {% endblock %}
 
 {% block content %}
-
+{% include 'includes/messages.html' %}
 {% with totail_items=cart|length %}
-  <h2 class = "table-bordered bg-primary text-white text-center mb-0 mt-3">
+  <h4 class = "table-bordered bg-success text-white text-center mb-0 mt-3 py-2">
   {% if cart|length > 0 %}
 	Sepetiniz
   {% else %}
     Sepetiniz boş!
   {% endif %}
 {% endwith %}
-  </h2>
-<table class="table table-hover table-bordered table-warning table-responsive-sm">
-  <thead>
+  </h4>
+<table class="table table-hover table-bordered table-responsive-sm">
+  <thead >
     <tr>
-      <th scope="col">Resim</th>
       <th scope="col">Ürün</th>
       <th scope="col">Miktar</th>
       <th scope="col">Sil</th>
+	  {% if user.is_superuser %}
 	  <th scope="col">Ağırlık</th>
+	  {% endif %}
 	  <th scope="col">Birim Fiyat</th>
 	  <th scope="col">Toplam Fiyat</th>
     </tr>
@@ -31,42 +32,40 @@
   {% for item in cart %}
   {% with product=item.product  %}
   <tr>
-    <td>
-      <a href="{{ product.get_absolute_url }}">
-	    <img src="{% if product.image %} {{ product.image.url }} {% else %} {% static 'img/default.jpg' %}  {% endif %}" style="height: 130px; width: auto">
-	  </a>
-    </td>
     <td>{{ product.name }}</td>
     <td>
-      <form action="{% url 'cart:cart_add' product.id %}" method="post">
+      <form action="{% url 'cart:cart_add' product.id %}" method="post" class = "form-inline">
         {% csrf_token %}
         {{ item.update_quantity_form.quantity }}
         {{ item.update_quantity_form.update }}
-        <input type="submit" value="Güncelle" class="btn btn-info btn-sm py-1">
+        <button type="submit" class="guncelle btn btn-sm btn-primary py-0">Güncelle</button>
       </form>
     </td>
     <td>
-      <a class = "btn btn-danger btn-sm" href="{% url 'cart:cart_remove' product.id %}">Kaldır</a>
+      <a class = "btn btn-danger btn-sm py-0" href="{% url 'cart:cart_remove' product.id %}">Kaldır</a>
     </td>
+	{% if user.is_superuser %}
 	<td>{{ item.total_agırlık }} desi</td>
+	{% endif %}
     <td>{{ item.price }} TL</td>
     <td>{{ item.total_price }} TL</td>
   </tr>
 {% endwith %}
 {% endfor %}
-<tr class = "bg-danger">
-    <td><b>Kargo ücreti</b></td>
-    <td colspan="5"></td>
-    <td colspan="num"><b>{{ cart.get_total_kargo }} TL</b></td>
-  </tr>
-  <tr class = "bg-warning">
+
+  <tr>
     <td><b>Ürünlerin Toplam Fiyatı</b></td>
-    <td colspan="5"></td>
+    <td colspan="{% if user.is_superuser %}4{% else %}3{% endif %}"></td>
     <td colspan="num"><b>{{ cart.get_total_price }} TL</b></td>
   </tr>
-    <tr class = "bg-success">
+  <tr>
+    <td><b>Kargo ücreti</b></td>
+    <td colspan="{% if user.is_superuser %}4{% else %}3{% endif %}"></td>
+    <td colspan="num"><b>{{ cart.get_total_kargo }} TL</b></td>
+  </tr>
+    <tr>
     <td><b>Toplam</b></td>
-    <td colspan="5"></td>
+    <td colspan="{% if user.is_superuser %}4{% else %}3{% endif %}"></td>
     <td colspan="num"><b>{{ cart.get_total_bedel }} TL</b></td>
   </tr>
   </tbody>

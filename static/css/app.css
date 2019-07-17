@@ -2,8 +2,70 @@
   font-family: 'Peralta', cursive;
 }
 
+html, body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+.#container {
+   min-height:100%;
+   position:relative;
+}
+
+body {
+   padding:10px;
+   padding-bottom:60px;
+}
+
+#footer{
+   position:absolute;
+   bottom:0;
+   width:100%;
+   height:60px;   /
+}
+
+[class*="col-"]{
+    margin-bottom: -99999px;
+    padding-bottom: 99999px;
+}
 
 .fa-whatsapp {
   color: #0aad27;
   font-size: 18px;
+}
+
+.fa-book-reader{
+	font-size: 32px;
+	color: orange;
+}
+
+.detail-resim{
+	    
+}
+
+/* Extra small devices (phones, up to 480px) */
+@media screen and (max-width: 767px) {
+	.urun-basligi {
+		font-size: 12px;
+	}
+}
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991px) {
+	.urun-basligi {
+		font-size: 12px;
+	}
+}
+/* tablets/desktops and up ----------- */
+@media (min-width: 992px) and (max-width: 1199px) {
+	.urun-basligi {
+		font-size: 12px;
+	}
+	
+}
+/* large desktops and up ----------- */
+@media screen and (min-width: 1200px) {
+	.urun-basligi {
+		font-size: 12px;
+	}
 }
