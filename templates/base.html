@@ -12,7 +12,7 @@
     {% block stylesheet %}{% endblock %}
   </head>
   
-  <div id="container">
+ 
   <body class = "{{anasayfa.body}}">
     {% block body %}
 	
@@ -82,7 +82,7 @@
 	  
  
 
-      <div class="container genel-container">
+      <div class="container content genel-container">
     <div class="row justify-content-end mr-1 mt-1 mb-2">
          <button class="btn btn-sm btn-info ">
             {% with totail_items=cart|length %}
@@ -128,8 +128,7 @@
     </ul>
 	
 	   <p class = "text-center"> © 2017 Tüm hakları saklıdır - <a href = "{% url 'anasayfa:copyright' %}" class = "text-white"> Kullanım Hakları</a> </p>
-		</footer>
-	</div>	
+		</footer>	
 	   
     {% endblock body %}	
     <script src="{% static 'js/jquery9.min.js' %}"></script>
