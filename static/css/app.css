@@ -5,7 +5,7 @@
 .content {
   min-height: calc(100vh - 50px);
 }
-footer {
+.footer {
   height: 50px;
   background-color: #333;
   color:#fff;
