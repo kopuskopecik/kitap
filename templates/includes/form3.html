@@ -9,7 +9,7 @@
 {% endif %}
 
 {% for field in form.visible_fields %}
-      <div class="form-group width = 10">
+      <div class="form-group mb-0">
         {{ field|add_class:'form-control form-control-sm' }}
         {% for error in field.errors %}
           <span class="help-block">{{ error }}</span>
