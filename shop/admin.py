@@ -29,9 +29,21 @@ class ProductAdmin(admin.ModelAdmin):
 
 
 class ResimAdmin(admin.ModelAdmin):
-    list_display = ['isim', 'resimler', ]
-    list_editable = ['resimler', ]
+    list_display = ['isim', 'images']
     list_filter = ['isim',]
+	
+    readonly_fields = ('tekresimler',)
+
+    def images(self, obj):
+        from django.utils.html import format_html
+        html = '<a href="{url}" target="_blank"><img src="{url}" width = "75wv" /></a>'
+        return format_html(''.join(html.format(url=image.image1.url) for image in obj.resimler.all()))
+		
+    def tekresimler(self, obj):
+        from django.utils.html import format_html
+        resimler = TekliResim.objects.all()
+        html = '<a href="{url}" target="_blank">{isim}<img src="{url}" width = "75wv" /></a>'
+        return format_html(''.join(html.format(url=image.image1.url, isim = image.isim) for image in resimler))
 
 class TekliResimAdmin(admin.ModelAdmin):
     list_display = ['isim', 'image1', ]
@@ -41,7 +53,7 @@ class TekliResimAdmin(admin.ModelAdmin):
 admin.site.register(AnaCategory, AnaCategoryAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Product, ProductAdmin)
-admin.site.register(TekliResim)
-admin.site.register(Resim)
+admin.site.register(TekliResim, TekliResimAdmin)
+admin.site.register(Resim, ResimAdmin)
 
 

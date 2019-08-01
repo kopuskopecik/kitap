@@ -5,9 +5,9 @@
 {% endblock %}
 
 {% block content %}
-<div class="row justify-content-md-center justify-content-sm-center">
-<div class = "col-md-4 col-lg-4 col-sm-6">
-<div class="card text-center mt-3 border border-white">
+<div class="row justify-content-md-center justify-content-sm-center justify-content-lg-center">
+<div class = "col-md-5 col-lg-5 col-sm-6 mt-3">
+<div class="card text-center border border-white">
   <div class="card-header">
     {{product.category.ana_kategori.name}}
   </div>
@@ -20,7 +20,7 @@
     </div>
   <div class="card-body">
   {% if not product.category.ana_kategori.sadece_madalyalı_mı %}
-  <a href = "{{product.get_nasil_url}}" type="button" class="btn btn-primary btn-sm btn-block w-50 mx-auto mb-2">Nasıl Uygulanır?</a>
+  <a href = "{{product.get_nasil_url}}" type="button" class="btn btn-primary btn-sm btn-block mx-auto mb-2">Nasıl Uygulanır?</a>
   {% endif %}
   {% if product.category.ana_kategori.sayfa_durumu %}
   <p class = "mb-0">Öğrenci Sayısı</p>
@@ -30,7 +30,7 @@
 	  {% endfor %}
 	</div>
   {% endif %}
-    <h5 class="card-title">{{product.name}}</h5>
+    <h5 class="card-title urun-basligi">{{product.name}}</h5>
 	<form class = "form-inline justify-content-center" action="{% url 'cart:cart_add' product.id %}" method="post">
     {% csrf_token %}
       {% include 'includes/form3.html' %}
@@ -38,9 +38,12 @@
     </form>
   </div>
 
-  <div class = "car-header bg-danger text-white">Açıklama</div>
-  <div class="card-text text-left mt-2">{{product.description|safe}}</div>
+  
 </div>
+</div>
+<div class = "col-md-4 col-lg-4 col-sm-6 mt-3">
+	<div class = "car-header bg-danger text-white ">Açıklama</div>
+	<div class="card-text text-left mt-2 urun-basligi">{{product.description|safe}}</div>
 </div>
 </div>
 {% endblock %}

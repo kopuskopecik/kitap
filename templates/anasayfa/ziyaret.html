@@ -19,12 +19,12 @@
 	  {% for yorum in yorumlar %}
 	  <div class="card mt-2">
 	  {% if yorum.okul == "İlkokul" %}
-		<div class="card-header text-white text-center" style="background-color: #c3e6cb;">
+		<div class="card-header text-white text-center py-0" style="background-color: #c3e6cb;">
 			<b>{{yorum.okul}}</b>
 		</div>
 		{% else %}
-		<div class="card-header text-white text-center" style="background-color: #b8daff;">
-			<b>{{yorum.okul}}</b>
+		<div class="card-header text-white text-center py-0" style="background-color: #b8daff;">
+			{{yorum.okul}}
 		</div>
 	  {% endif %}
 		<div class="card-body">

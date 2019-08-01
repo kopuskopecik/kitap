@@ -106,7 +106,7 @@ class RenkFont(models.Model):
 	isim = models.CharField(max_length= 50, default = "Site Geneli Özellikler")
 	navbardaki_yazı = models.CharField("Navbardaki yazı", max_length= 250, default = "KİTAP OKUMA HEDEFİNİZE PLANLI ÇÖZÜM")
 	site_adı = models.CharField("Sitenin Adı", max_length= 250, default = "Kitap Turnuvası")
-	cep_telefonu = models.CharField("Sitenin Adı", max_length= 50, default = "0505 763 63 81")
+	cep_telefonu = models.CharField("Cep Telefonu", max_length= 50, default = "0505 763 63 81")
 	
 	class Meta:
 		verbose_name = 'Renk-ve-Yazı'
