@@ -30,7 +30,7 @@ class Order(models.Model):
     updated = models.DateTimeField(auto_now=True)
     paid = models.BooleanField("Ödenme durumu", default=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name = "Müşteri", blank = True, null = True)
-    siparis_durumu = models.CharField('Sipariş Durumu:', max_length=10, choices=SIPARIS_DURUMLARI, blank = True)
+    siparis_durumu = models.CharField('Sipariş Durumu:', max_length=10, choices=SIPARIS_DURUMLARI, default = "1")
     siparis_notu = models.TextField("Sipariş_notu:", blank = True)
 	
     class Meta:

@@ -119,8 +119,6 @@ def product_detail(request, id, slug):
     return render(request, 'shop/product/detail.html', context)
 
 def product_detail_nasil_uygulanir(request, id, slug):
-	
-	
     product = get_object_or_404(Product, id=id, slug=slug)
     context = {
         'product': product,

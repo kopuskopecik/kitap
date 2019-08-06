@@ -58,7 +58,7 @@ class DokumanListView(generic.ListView):
 class YasalView(generic.TemplateView):
 	template_name = 'anasayfa/yasal.html'
 
-class İletisimView(generic.TemplateView):
+class IletisimView(generic.TemplateView):
     template_name = 'anasayfa/iletisim.html'
 
 def deneme(request):

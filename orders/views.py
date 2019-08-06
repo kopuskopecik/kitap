@@ -1,8 +1,18 @@
 from django.shortcuts import render, redirect
-from .models import OrderItem
+from django.contrib.auth.decorators import login_required
+from .models import OrderItem, Order
 from .forms import OrderCreateForm
 from cart.cart import Cart
 
+@login_required
+def siparislerim(request):
+	siparisler = Order.objects.filter(user = request.user)
+	print(siparisler)
+	context = {
+		'siparisler': siparisler,
+	}
+	
+	return render(request, 'orders/order/siparislerim.html', context)
 
 def order_create(request):
     cart = Cart(request)

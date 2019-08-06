@@ -21,7 +21,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from boards import views
-from accounts.views import StudentSignUpView, TeacherSignUpView, UserUpdateView, SignUpView, UyelikView
+from accounts.views import TeacherSignUpView, UserUpdateView, SignUpView, UyelikView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,7 +30,7 @@ urlpatterns = [
     path('turnuva/', include('turnuva.urls')),
     #path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/signup/', SignUpView.as_view(), name='signup'),
-    path('accounts/signup/student/', StudentSignUpView.as_view(), name='student_signup'),
+    #path('accounts/signup/student/', StudentSignUpView.as_view(), name='student_signup'),
     path('accounts/signup/teacher/', TeacherSignUpView.as_view(), name='teacher_signup'),
 	#path('accounts/turnuva/', turnuva, name='turnuva'),
     
