@@ -33,6 +33,8 @@ class AnaSayfa(generic.ListView):
 class GenelDetailView(generic.DetailView):
 	model = Genel
 	template_name = 'anasayfa/genel-detail.html'
+	ordering = ('sira',)
+	queryset = Genel.objects.filter(aktif = True)
 
 class ZiyaretView(SuccessMessageMixin, generic.CreateView):
 	model = Yorum
@@ -50,6 +52,8 @@ class DokumanListView(generic.ListView):
 	model = Dokuman
 	template_name = 'anasayfa/dokumanlar.html'
 	context_object_name = "dokumanlar"
+	ordering = ('sira',)
+	queryset = Dokuman.objects.filter(aktif = True)
 
 class YasalView(generic.TemplateView):
 	template_name = 'anasayfa/yasal.html'

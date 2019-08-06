@@ -41,7 +41,7 @@
 			</ol>
 		<div class="carousel-inner">
 			<div class="carousel-item active">
-				<img src="{{ilk_slayt.image.url}}" class="d-block w-100" alt="...">
+				<img src="{{ilk_slayt.image.url}}" class="d-block w-100 slayt-resmi" alt="...">
 				<div class="carousel-caption d-none d-md-block">
 					<h5>{{ilk_slayt.isim}}</h5>
 					<p>{{ilk_slayt.yazı}}</p>
@@ -49,7 +49,7 @@
 			</div>
 		{% for slayt in diger_slaytlar %}
 		<div class="carousel-item">
-			<img src="{{ slayt.image.url }}" class="d-block w-100" alt="...">
+			<img src="{{ slayt.image.url }}" class="d-block w-100 slayt-resmi" alt="...">
 			<div class="carousel-caption d-none d-md-block">
 				<h5>{{ slayt.isim }}</h5>
 				<p>{{ slayt.yazı }}</p>

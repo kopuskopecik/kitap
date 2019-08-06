@@ -12,6 +12,16 @@ from .models import User
 class SignUpView(TemplateView):
     template_name = 'accounts/signup.html'
 
+class UyelikView(TemplateView):
+	template_name = 'accounts/uyelik.html'
+	
+	def get(self, request, *args, **kwargs):
+		context = self.get_context_data(**kwargs)
+		if request.user.is_authenticated:
+			return redirect('orders:order_create')
+		else:
+			return self.render_to_response(context)
+		
 
 class StudentSignUpView(CreateView):
     model = User
@@ -39,7 +49,8 @@ class TeacherSignUpView(CreateView):
     def form_valid(self, form):
         user = form.save()
         login(self.request, user)
-        return redirect('anasayfa:anasayfa')
+        next = self.request.GET.get('next', '/')
+        return redirect(next)
 
 @method_decorator(login_required, name='dispatch')
 class UserUpdateView(UpdateView):

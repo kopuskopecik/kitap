@@ -15,9 +15,9 @@ class YorumAdmin(admin.ModelAdmin):
     list_editable = ['content', 'aktif',]
 
 class DokumanAdmin(admin.ModelAdmin):
-    list_display = ['isim', 'slug', 'dokuman_ekle']
+    list_display = ['isim', 'slug', 'dokuman_ekle', 'sira']
     prepopulated_fields = {'slug': ('isim',)}
-    list_editable = ['slug', 'dokuman_ekle']
+    list_editable = ['slug', 'dokuman_ekle', 'sira',]
 
 admin.site.register(Dokuman, DokumanAdmin)
 admin.site.register(Yorum, YorumAdmin)

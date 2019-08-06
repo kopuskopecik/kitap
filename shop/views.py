@@ -5,8 +5,8 @@ from cart.forms import CartAddProductForm
 
 def product_list(request):
     categories = AnaCategory.objects.filter(aktif = True).order_by('sıralama_sayısı')
-    products1 = Product.objects.filter(category__ana_kategori__aktif = True, aktif = True, ogrenci_sayisi = "e").order_by("price")
-    products2 = Product.objects.filter(category__ana_kategori__aktif = True, aktif = True, ogrenci_sayisi = "a").order_by("price")
+    products1 = Product.objects.filter(category__ana_kategori__aktif = True, aktif = True, ogrenci_sayisi = "e").order_by("category__sayi")
+    products2 = Product.objects.filter(category__ana_kategori__aktif = True, aktif = True, ogrenci_sayisi = "a").order_by("category__sayi")
 
     ogrenci_sayısı = (
 		('b', 10),
@@ -30,7 +30,7 @@ def product_list(request):
 
 def product_filter_list(request, sayi):
     categories = AnaCategory.objects.filter(aktif = True).order_by('sıralama_sayısı')
-    products1 = Product.objects.filter(category__ana_kategori__aktif = True, ogrenci_sayisi = sayi, aktif = True)
+    products1 = Product.objects.filter(category__ana_kategori__aktif = True, ogrenci_sayisi = sayi, aktif = True).order_by("category__sayi")
 
     ogrenci_sayısı = (
 		('b', 10),
@@ -54,9 +54,9 @@ def product_filter_list(request, sayi):
 def category_product_list(request, category_slug):
     category = get_object_or_404(AnaCategory, slug=category_slug, aktif = True)
     if not category.bireysel_mi:
-        products = Product.objects.filter(category__ana_kategori=category, aktif = True,  ogrenci_sayisi = "c").order_by("price")
+        products = Product.objects.filter(category__ana_kategori=category, aktif = True,  ogrenci_sayisi = "c").order_by("category__sayi")
     else:
-        products = Product.objects.filter(category__ana_kategori=category, aktif = True).order_by("price")
+        products = Product.objects.filter(category__ana_kategori=category, aktif = True).order_by("category__sayi")
     categories = AnaCategory.objects.exclude(slug = category_slug).filter(aktif = True).order_by('sıralama_sayısı')
 
     ogrenci_sayısı = (
@@ -80,7 +80,7 @@ def category_product_list(request, category_slug):
 
 def category_product_filter_list(request, category_slug, sayi):
     category = get_object_or_404(AnaCategory, slug=category_slug, aktif = True)
-    products = Product.objects.filter(category__ana_kategori=category, ogrenci_sayisi = sayi)
+    products = Product.objects.filter(category__ana_kategori=category, ogrenci_sayisi = sayi).order_by("category__sayi")
     categories = AnaCategory.objects.exclude(slug = category_slug).filter(aktif =True).order_by('sıralama_sayısı')
 
     ogrenci_sayısı = (

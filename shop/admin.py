@@ -36,13 +36,13 @@ class ResimAdmin(admin.ModelAdmin):
 
     def images(self, obj):
         from django.utils.html import format_html
-        html = '<a href="{url}" target="_blank"><img src="{url}" width = "75wv" /></a>'
+        html = '<a href="{url}" target="_blank"><img src="{url}" width = "100vw" /></a>'
         return format_html(''.join(html.format(url=image.image1.url) for image in obj.resimler.all()))
 		
     def tekresimler(self, obj):
         from django.utils.html import format_html
         resimler = TekliResim.objects.all()
-        html = '<a href="{url}" target="_blank">{isim}<img src="{url}" width = "75wv" /></a>'
+        html = '<a href="{url}" target="_blank">{isim}<img src="{url}" width = "100vw" /></a>'
         return format_html(''.join(html.format(url=image.image1.url, isim = image.isim) for image in resimler))
 
 class TekliResimAdmin(admin.ModelAdmin):

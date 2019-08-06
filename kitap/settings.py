@@ -27,7 +27,7 @@ DEBUG = True
 
 
 ALLOWED_HOSTS = []
-ALLOWED_HOSTS = ["eturnuva.pythonanywhere.com"]
+#ALLOWED_HOSTS = ["eturnuva.pythonanywhere.com"]
 
 # Application definition
 
@@ -81,6 +81,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
 				 'cart.context_processors.cart',
 				 'cart.context_processors.anasayfa',
+				 
             ],
         },
     },

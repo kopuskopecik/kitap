@@ -75,6 +75,8 @@ class Genel(models.Model):
 	resim_grubu = models.ForeignKey(Resim, on_delete=models.CASCADE, blank = True , null = True, verbose_name = "Resim grubu", related_name= "resim_grubu")
 	kısa_içerik = RichTextField()
 	uzun_içerik = RichTextField()
+	aktif = models.BooleanField("aktif mi", default = False)
+	sira = models.PositiveIntegerField("Sıralama Sayısı", default = 0)
 	
 	class Meta:
 		verbose_name = 'Genel-Konu'
@@ -152,6 +154,8 @@ class Dokuman(models.Model):
     isim = models.CharField("Doküman Adı:", max_length= 50)
     slug = models.SlugField(unique=True, max_length=130)
     dokuman_ekle = models.FileField("doküman yükle")
+    aktif = models.BooleanField("aktif mi", default = False)
+    sira = models.PositiveIntegerField("Sıralama Sayısı", default = 0)
     
     class Meta:
         verbose_name = 'Doküman'

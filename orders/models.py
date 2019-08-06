@@ -11,8 +11,16 @@ KARGO_TIPLERI = (
     ('2', 'Kapıda Tek Çekim Kredi Kartı Ödeme'),
     ('3', 'EFT ile Ödeme'),
 )
+
+SIPARIS_DURUMLARI = (
+    ('1', 'İşlemde'),
+    ('2', 'Hazırlanıyor'),
+    ('3', 'Kargoya Teslim Edildi'),
+)
+
+
 class Order(models.Model):
-    kargo_tipi = (models.CharField('Ödeme Tercihiniz:', max_length=10, choices=KARGO_TIPLERI, help_text = "Blabla"))
+    kargo_tipi = models.CharField('Ödeme Tercihiniz:', max_length=10, choices=KARGO_TIPLERI, help_text = "Blabla")
     first_name = models.CharField("Adınız:", max_length=60)
     last_name = models.CharField("Soyadınız:",max_length=60)
     email = models.EmailField()
@@ -21,7 +29,10 @@ class Order(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     paid = models.BooleanField("Ödenme durumu", default=False)
-
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name = "Müşteri", blank = True, null = True)
+    siparis_durumu = models.CharField('Sipariş Durumu:', max_length=10, choices=SIPARIS_DURUMLARI, blank = True)
+    siparis_notu = models.TextField("Sipariş_notu:", blank = True)
+	
     class Meta:
         ordering = ('-created', )
         verbose_name = 'Sipariş'
@@ -83,10 +94,21 @@ class OrderItem(models.Model):
     price = models.DecimalField("Fiyat", max_digits=10, decimal_places=2)
     quantity = models.PositiveIntegerField("Miktar", default=1)
     agırlık = models.PositiveIntegerField("Ağırlık", default=0)
+	
+    def __str__(self):
+        return self.product.name
+	
+	
+	
+    class Meta:
+        verbose_name = 'Ürün'
+        verbose_name_plural = "Ürünler"
 
     def get_cost(self):
         return self.price * self.quantity
     
     def get_agırlık(self):
         return self.agırlık * self.quantity
+	
+	
 
