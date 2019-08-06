@@ -27,7 +27,7 @@ DEBUG = True
 
 
 ALLOWED_HOSTS = []
-#ALLOWED_HOSTS = ["eturnuva.pythonanywhere.com"]
+ALLOWED_HOSTS = ["eturnuva.pythonanywhere.com"]
 
 # Application definition
 
