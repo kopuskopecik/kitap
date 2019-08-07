@@ -120,7 +120,8 @@ class RenkFont(models.Model):
 class Slayt(models.Model):
     isim = models.CharField("Başlık", max_length= 50, blank=True)
     yazı = models.CharField("Yazı", max_length= 200, blank=True)
-    image = models.ImageField("resim", blank=True, null = True)
+    image = models.ImageField("Dikdörtgen Resim", blank=True, null = True)
+    image2 = models.ImageField("Kare Resim", blank=True, null = True)
     aktif = models.BooleanField("Aktif mi?", help_text="Sitede görünmesini istiyorsanız işaretleyiniz!!!", default = False)
     sıralama_sayısı = models.PositiveIntegerField("Anasayfa Sıralama Sayısı", default = 0)
 

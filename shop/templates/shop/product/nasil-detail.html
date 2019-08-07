@@ -5,15 +5,16 @@
 {% endblock %}
 
 {% block content %}
-<div class="card mb-3 text-center">
-<div class="card-header bg-danger text-white"><h5>{{product.name}} <br>NASIL UYGULANIR?</h5></div>
-{% if product.category.nasıl_uygulanır_resimleri %}
-	
-	  {% for resim in product.category.nasıl_uygulanır_resimleri.resimler.all %}
-		<img src="{{resim.image1.url}}" class="img-fluid img-thumbnail mb-2" alt="{{resim.isim}}">
-	  {% endfor %}
-
-	
-{% endif %}
+<div class = "row justify-content-md-center justify-content-sm-center justify-content-lg-center">
+	<div class = "col-md-6 col-lg-6 col-sm-8">
+		<div class="card mb-3 text-center">
+			<div class="card-header bg-danger text-white"><h5>{{product.name}} <br>NASIL UYGULANIR?</h5></div>
+		  {% if product.category.nasıl_uygulanır_resimleri %}
+			{% for resim in product.category.nasıl_uygulanır_resimleri.resimler.all %}
+				<img src="{{resim.image1.url}}" class="img-fluid img-thumbnail mb-2" alt="{{resim.isim}}">
+			{% endfor %}	
+		  {% endif %}
+		</div>
+	</div>
 </div>
 {% endblock %}

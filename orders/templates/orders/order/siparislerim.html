@@ -6,32 +6,45 @@
 
 {% block content %}
 {% include 'includes/messages.html' %}
+{% if siparisler %}
 <h2 class = "text-center bg-info text-white">Siparişlerim</h2>
 <table class="table table-hover table-bordered table-responsive-sm">
   <thead class ="bg-warning">
     <tr>
+	  <th scope="col">No</th>
       <th scope="col">Ürünler</th>
 	  <th scope="col">Sipariş Durumu</th>
+	  <th>Tarih</th>
 	  <th scope="col">Ödeme Tercihiniz</th>
 	  <th scope="col">Sipariş Notu</th>
-	  <th>Tutar</th>
-	  <th>Tarih</th>
+	  <th>Bankacılık Tutarı</th>
+	  <th>Ürün Tutarı</th>
+	  <th>Kargo Tutarı</th>
+	  <th>Toplam Tutar</th>
+	  
     </tr>
   </thead>
   <tbody>
 {% for siparis in siparisler %}
 	<tr>
-		<td>{% for urun in siparis.orderitem_set.all %} {{urun.quantity}} adet <a href = "{{urun.product.get_absolute_url}}">{{ urun.product.name }}</a>, {% endfor %}</td>
+		<td>{{forloop.counter}}</td>
+		<td>{% for urun in siparis.orderitem_set.all %} {{urun.quantity}} set <a href = "{{urun.product.get_absolute_url}}">{{ urun.product.name }}</a>, {% endfor %}</td>
 		<td class = "text-danger">{{ siparis.get_siparis_durumu_display }}</td>
+		<td>{{ siparis.created|timesince}} önce</td>
 		<td>{{ siparis.get_kargo_tipi_display }}</td>
 		<td>{% if not urun.order.siparis_notu%} Yok {% else %} {{ urun.order.siparis_notu }} {% endif%}</td>
-		<td>{{ siparis.get_total_bedel }} TL</td>
-		<td>{{ siparis.created}}</td>
+		<td>{{ siparis.banka_bedel }} TL</td>
+		<td>{% for urun in siparis.orderitem_set.all %} {{urun.quantity}} set <a href = "{{urun.product.get_absolute_url}}">{{ urun.product.name }}</a> <b>{{urun.get_cost}} TL</b>, {% endfor %}</td>
+		<td>{{ siparis.get_total_kargo }} TL</td>
+		<td class = "text-danger">{% if siparis.indirim_tutari > 0 %} <s>{{ siparis.get_total_bedel }} TL</s> <b>{{siparis.get_indirimli_bedel}} TL</b> {% else %} <b>{{ siparis.get_total_bedel }} TL</b> {% endif %}</td>
+		
 	</tr>	
 {% endfor %}
   </tbody>
 </table>
-
+{% else %}
+<p> Üye olarak gerçekleştirdiğiniz bir sipariş bulunmamaktadır.</p>
+{% endif %}
 {% endblock %}
 
 

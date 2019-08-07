@@ -31,7 +31,8 @@ class Order(models.Model):
     paid = models.BooleanField("Ödenme durumu", default=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name = "Müşteri", blank = True, null = True)
     siparis_durumu = models.CharField('Sipariş Durumu:', max_length=10, choices=SIPARIS_DURUMLARI, default = "1")
-    siparis_notu = models.TextField("Sipariş_notu:", blank = True)
+    siparis_notu = models.TextField("Sipariş Notu:", blank = True)
+    indirim_tutari = models.PositiveIntegerField("İndirim Miktarı", default=0)
 	
     class Meta:
         ordering = ('-created', )
@@ -44,6 +45,8 @@ class Order(models.Model):
 
     def get_total_cost(self):
         return sum(item.get_cost() for item in self.orderitem_set.all())
+	
+    get_total_cost.short_description = "Ürünlerin toplam bedeli"
     
     def get_total_kargo(self):
         toplam_agırlık = sum(item.get_agırlık() for item in self.orderitem_set.all())
@@ -77,15 +80,27 @@ class Order(models.Model):
         if  kargo.agırlık14 <= toplam_agırlık :
             return kargo.fiyat14
 	
+    get_total_kargo.short_description = "Kargo bedeli"
+	
     def get_total_bedel(self):
         return self.get_total_cost() + self.get_total_kargo() + self.banka_bedel()
+
+    get_total_bedel.short_description = "Toplam Tutar"
     
+    def get_indirimli_bedel(self):
+        return self.get_total_cost() + self.get_total_kargo() + self.banka_bedel() - self.indirim_tutari
+	
+    get_indirimli_bedel.short_description = "İndirimli Toplam Tutar"
+	
     def banka_bedel(self):
         if self.kargo_tipi == "3":
             return 0
         else:
             kargo = Kargo.objects.first()
             return kargo.bankacılık_bedeli
+		
+
+    banka_bedel.short_description = "Banka bedeli"
 
 
 class OrderItem(models.Model):

@@ -8,7 +8,7 @@
 }
 
 .navbar-brand {
-  font-family: 'Peralta', cursive;
+  font-family: 'Lobster', cursive;
 }
 
 
@@ -28,6 +28,14 @@
 
 .slayt-resmi {
 	
+}
+
+#id_address {
+	height: 120px;
+}
+
+#id_siparis_notu{
+	height: 60px;
 }
 
 /* Extra small devices (phones, up to 480px) */

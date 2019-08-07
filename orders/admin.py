@@ -8,9 +8,9 @@ class OrderInline(admin.TabularInline):
 
 class OrderAdmin(admin.ModelAdmin):
     inlines = [OrderInline,]
-    list_display = ['first_name', 'last_name', 'city', 'paid', 'created', 'siparis_durumu', 'siparis_notu',]
+    list_display = ['first_name', 'last_name', 'city', 'paid', 'created', 'siparis_durumu', 'siparis_notu', 'indirim_tutari', 'get_total_cost', 'get_total_kargo', 'banka_bedel','get_total_bedel', 'get_indirimli_bedel', ]
     list_filter = ['paid', 'created', 'updated']
-    list_editable = ['siparis_durumu', 'paid',]
+    list_editable = ['siparis_durumu', 'paid', 'indirim_tutari',]
 
 
 admin.site.register(Order, OrderAdmin)

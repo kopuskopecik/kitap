@@ -71,7 +71,7 @@
   </tbody>
 </table>
 <div class="text-right">
-  <a href="{% url 'shop:product_list' %}" class="btn btn-info">Alışverişe Devam</a>
+  <a href="{% url 'anasayfa:anasayfa' %}" class="btn btn-info">Alışverişe Devam</a>
   <a href="{% if request.user.is_authenticated%}{% url 'orders:order_create' %} {% else %} {% url 'uyelik' %}{% endif %}" class="btn btn-success">Tamamla</a>
 </div>
 {% endblock %}
