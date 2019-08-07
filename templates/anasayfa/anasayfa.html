@@ -55,7 +55,7 @@
 		{% for slayt in diger_slaytlar %}
 		<div class="carousel-item">
 		  <picture>
-		  {% if slayt.image slayt.image2 %}
+		  {% if slayt.image and slayt.image2 %}
 			<source srcset = "{{slayt.image2.url}}" media = "(max-width:767px)">
 			<img src="{{ slayt.image.url }}" class="d-block w-100 slayt-resmi" alt="...">
 		  {% endif %}
