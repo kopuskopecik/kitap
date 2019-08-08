@@ -19,31 +19,46 @@ class CategoryAdmin(admin.ModelAdmin):
 	list_editable = ['ana_kategori', 'sayi', 'image1', 'nasıl_uygulanır_resimleri', 'odul_buttonu_resimleri', 'madalyalı_mı', 'sayfa_sayısı','aktif']
 	prepopulated_fields = {'slug': ('name',)}
 	list_filter = ['ana_kategori', 'aktif']
+	
+	fields = (
+		'ana_kategori',
+		('name', 'slug'),
+		('image1', 'nasıl_uygulanır_resimleri'),
+		('sayi', 'madalyalı_mı', 'sayfa_sayısı', 'aktif'),
+	)
 
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['name', 'slug', 'category', 'anasayfada_gosterilsin_mi', 'sıralama_sayısı', 'price', 'agırlık', 'ogrenci_sayisi','aktif']
-    list_editable = ['category', 'anasayfada_gosterilsin_mi', 'sıralama_sayısı','price', 'agırlık', 'ogrenci_sayisi', 'aktif']
-    list_filter = ['category', 'category__ana_kategori', 'sıralama_sayısı','anasayfada_gosterilsin_mi', 'aktif']
-    prepopulated_fields = {'slug': ('name',)}
+	list_display = ['name', 'slug', 'category', 'anasayfada_gosterilsin_mi', 'sıralama_sayısı', 'price', 'agırlık', 'ogrenci_sayisi','aktif']
+	list_editable = ['category', 'anasayfada_gosterilsin_mi', 'sıralama_sayısı','price', 'agırlık', 'ogrenci_sayisi', 'aktif']
+	list_filter = ['category', 'category__ana_kategori', 'sıralama_sayısı','anasayfada_gosterilsin_mi', 'aktif']
+	prepopulated_fields = {'slug': ('name',)}
+	
+	fields = (
+		'category',
+		('name', 'slug'),
+		'description',
+		('price', 'degisiklik', 'agırlık'),
+		('ogrenci_sayisi', 'anasayfada_gosterilsin_mi', 'aktif', 'sıralama_sayısı'),
+	)
 
 
 class ResimAdmin(admin.ModelAdmin):
-    list_display = ['isim', 'images']
+    list_display = ['isim',]
     list_filter = ['isim',]
 	
-    readonly_fields = ('tekresimler',)
+    #readonly_fields = ('tekresimler',)
 
-    def images(self, obj):
-        from django.utils.html import format_html
-        html = '<a href="{url}" target="_blank"><img src="{url}" width = "100vw" /></a>'
-        return format_html(''.join(html.format(url=image.image1.url) for image in obj.resimler.all()))
+    #def images(self, obj):
+    #    from django.utils.html import format_html
+    #    html = '<a href="{url}" target="_blank"><img src="{url}" width = "100vw" /></a>'
+     #   return format_html(''.join(html.format(url=image.image1.url) for image in obj.resimler.all()))
 		
-    def tekresimler(self, obj):
-        from django.utils.html import format_html
-        resimler = TekliResim.objects.all()
-        html = '<a href="{url}" target="_blank">{isim}<img src="{url}" width = "100vw" /></a>'
-        return format_html(''.join(html.format(url=image.image1.url, isim = image.isim) for image in resimler))
+    #def tekresimler(self, obj):
+     #   from django.utils.html import format_html
+      #  resimler = TekliResim.objects.all()
+       # html = '<a href="{url}" target="_blank">{isim}<img src="{url}" width = "100vw" /></a>'
+        #return format_html(''.join(html.format(url=image.image1.url, isim = image.isim) for image in resimler))
 
 class TekliResimAdmin(admin.ModelAdmin):
     list_display = ['isim', 'image1', ]

@@ -18,7 +18,7 @@ class AnaSayfa(generic.ListView):
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
 		urunler = Product.objects.filter(anasayfada_gosterilsin_mi = True).order_by('sıralama_sayısı')
-		genel = Genel.objects.all()
+		genel = Genel.objects.filter(aktif = True )
 		slaytlar = Slayt.objects.filter(aktif = True)
 		if slaytlar:
 			ilk_slayt = slaytlar[0]

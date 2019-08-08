@@ -8,9 +8,6 @@
 <div class="row justify-content-md-center justify-content-sm-center justify-content-lg-center">
 <div class = "col-md-5 col-lg-5 col-sm-6 mt-3">
 <div class="card text-center border border-white">
-  <div class="card-header">
-    {{product.category.ana_kategori.name}}
-  </div>
   <img class="card-img-top img-responsive detail-resim" src="{{product.category.image1.url}}" alt="Card image cap">
     <div class="card-footer py-1 bg-light">
           <small class="font-weight-bold">{{product.price}} TL</small>
@@ -42,7 +39,7 @@
 </div>
 </div>
 <div class = "col-md-4 col-lg-4 col-sm-6 mt-3">
-	<div class = "car-header bg-danger text-white text-center">Açıklama</div>
+	<div class = "car-header bg-danger text-white text-center py-1 rounded">Ürün içeriği</div>
 	<div class="card-text text-left mt-2 urun-basligi">{{product.description|safe}}</div>
 </div>
 </div>

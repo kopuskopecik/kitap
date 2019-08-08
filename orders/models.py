@@ -9,7 +9,7 @@ ILLER = [['1', 'Adana'], ['2', 'Adıyaman'], ['3', 'Afyonkarahisar'], ['4', 'Ağ
 KARGO_TIPLERI = (
     ('1', 'Kapıda Nakit Ödeme'),
     ('2', 'Kapıda Tek Çekim Kredi Kartı Ödeme'),
-    ('3', 'EFT ile Ödeme'),
+    ('3', 'Havale/EFT'),
 )
 
 SIPARIS_DURUMLARI = (

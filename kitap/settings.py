@@ -27,18 +27,18 @@ DEBUG = True
 
 
 ALLOWED_HOSTS = []
-ALLOWED_HOSTS = ["eturnuva.pythonanywhere.com"]
+#ALLOWED_HOSTS = ["eturnuva.pythonanywhere.com"]
 
 # Application definition
 
 INSTALLED_APPS = [
 	
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
+	'django.contrib.admin',
+	'django.contrib.auth',
+	'django.contrib.contenttypes',
+	'django.contrib.sessions',
+	'django.contrib.messages',
+	'django.contrib.staticfiles',
 	'django.contrib.humanize',
 	
 	'widget_tweaks',
@@ -46,12 +46,12 @@ INSTALLED_APPS = [
 	'ckeditor',
 	'crispy_forms',
 	
-	'accounts',
+	'orders.apps.OrdersConfig',
 	'shop.apps.ShopConfig',
+	'anasayfa',	
+	'accounts',	
     'cart.apps.CartConfig',
-    'orders.apps.OrdersConfig',
-	'turnuva',
-	'anasayfa',
+	'turnuva',	
 	'boards',
 	
 ]
