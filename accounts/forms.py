@@ -27,6 +27,7 @@ class StudentSignUpForm(UserCreationForm):
 
 class TeacherSignUpForm(UserCreationForm):
     email = forms.CharField(max_length=254, required=True, widget=forms.EmailInput())
+    password1 = forms.CharField(label = "Parola", widget=forms.PasswordInput(attrs={'placeholder':'Parolanız en az 8 karakterden oluşmalıdır'}))
     class Meta(UserCreationForm.Meta):
         model = User
         fields = ('username', 'email', 'password1', 'password2')
