@@ -1,6 +1,7 @@
 from django.db import models
 from shop.models import Product
 from accounts.models import User
+from django.urls import reverse
 
 from cart.models import Kargo
 
@@ -42,6 +43,18 @@ class Order(models.Model):
 
     def __str__(self):
         return 'Sipariş {}'.format(self.id)
+	
+    def get_absolute_url(self):
+        return reverse('orders:siparis-detail', kwargs={'id':self.id})
+		
+    def urun_ekle(self):
+        return reverse('orders:siparis-detail-urun-ekle', kwargs={'id':self.id})
+	
+    def siparis_olustur(self):
+        return reverse('orders:siparis-ekle')
+
+    def siparis_duzenle(self):
+        return reverse('orders:siparis-duzenle', kwargs={'id':self.id})
 
     def get_total_cost(self):
         return sum(item.get_cost() for item in self.orderitem_set.all())
@@ -106,7 +119,7 @@ class Order(models.Model):
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, verbose_name = "Sipariş")
     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name = "Ürün")
-    price = models.DecimalField("Fiyat", max_digits=10, decimal_places=2)
+    price = models.DecimalField("Fiyat", max_digits=10, decimal_places=2, default = 0)
     quantity = models.PositiveIntegerField("Miktar", default=1)
     agırlık = models.PositiveIntegerField("Ağırlık", default=0)
 	
@@ -124,6 +137,13 @@ class OrderItem(models.Model):
     
     def get_agırlık(self):
         return self.agırlık * self.quantity
+	
+    def save(self, *args, **kwargs):
+        self.price = self.product.price
+        self.agırlık = self.product.agırlık
+        return super(OrderItem, self).save(*args, **kwargs)
+	
+
 	
 	
 

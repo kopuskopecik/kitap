@@ -38,17 +38,38 @@
 	height: 60px;
 }
 
+
+
+
 /* Extra small devices (phones, up to 480px) */
 @media screen and (max-width: 767px) {
 	.urun-basligi {
 		font-size: 12px;
 	}
+	
+	.siparis-tablo{
+		
+	}
+	
+	.liste {
+	max-height: 35vh;
+	overflow: auto;
+	margin-left:5px;
+	margin-top: 3px;
+	margin-top: 13px!important;
+}
+	
 }
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) and (max-width: 991px) {
 	.urun-basligi {
 		font-size: 12px;
 	}
+	.liste, .icerik {
+	max-height: 100vh;
+	overflow: auto;
+}
+	
 }
 /* tablets/desktops and up ----------- */
 @media (min-width: 992px) and (max-width: 1199px) {
@@ -56,10 +77,19 @@
 		font-size: 12px;
 	}
 	
+	.liste, .icerik {
+	max-height: 100vh;
+	overflow: auto;
+}
+	
 }
 /* large desktops and up ----------- */
 @media screen and (min-width: 1200px) {
 	.urun-basligi {
 		font-size: 12px;
 	}
+	.liste, .icerik {
+	max-height: 100vh;
+	overflow: auto;
+}
 }

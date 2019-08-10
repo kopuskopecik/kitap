@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Siparişiniz
+{% endblock %}
+
+{% block content %}
+
+<div class = "row justify-content-md-center">
+	<div class = "col-md-8">
+		<h1 class = "text-center text-info py-0 mb-0">Tüm Siparişler</h1>
+		<div class="card-body">
+			<div class="list-group">
+			{% for siparis in siparisler %}
+			  <a href="{{siparis.get_absolute_url}}" class="list-group-item list-group-item-action list-group-item-info">{{siparis.first_name}} {{siparis.last_name}}</a>
+			{% endfor %}
+			</div>
+		</div>
+	</div>
+</div>
+
+
+{% endblock %}
