@@ -21,6 +21,21 @@ SAYFA_SAYISI = (
 	('c', 2500),
 )
 
+BUTTON_RENKLERİ = (
+
+	("btn-primary", "mavi"),
+	("btn-secondary", "gri"),
+	("btn-success", "yeşil"),
+	("btn-danger", "kırmızı"),
+	("btn-warning", "turuncu"),
+	("btn-info", "açık mavi"),
+	("btn-light", "ince beyaz"),
+	("btn-dark", "koyu siyah"),
+	("btn-white", "kalın beyaz"),
+	("btn-link", "sadece mavi link"),
+
+)
+
 class AnaCategory(models.Model):
 	name = models.CharField("kategori adı", max_length=150, db_index=True)
 	slug = models.SlugField("internet adresi",max_length=150, unique=True ,db_index=True, help_text = "Burası yalnızca site-dizaynı için. Dokunmayınız!")
@@ -30,6 +45,7 @@ class AnaCategory(models.Model):
 	sıralama_sayısı = models.PositiveIntegerField("Sıralama Sayısı")
 	aktif = models.BooleanField("Aktif mi?", help_text="Sitede görünmesini istiyorsanız işaretleyiniz!!!", default = False)
 	indirim_miktarı = models.PositiveIntegerField("İndirim miktarı", default = 0)
+	arka_plan_renk = models.CharField('Anakategori arka plan rengi', max_length=50, choices=BUTTON_RENKLERİ, default = "btn-primary")
 	
 	class Meta:
 		ordering = ('sıralama_sayısı', )
@@ -72,7 +88,8 @@ class Category(models.Model):
     ana_kategori = models.ForeignKey(AnaCategory, on_delete=models.CASCADE, verbose_name = "Ana Kategori", related_name = "altkategoriler")
     name = models.CharField("kategori adı", max_length=150, db_index=True)
     slug = models.SlugField("internet adresi",max_length=150, unique=True ,db_index=True)
-    image1 = models.ImageField("Kategori Resmi", blank=True, null = True)
+    image1 = models.ImageField("Küçültülmüş Kategori Resmi", blank=True, null = True)
+    image2 = models.ImageField("Gerçek Kategori Resmi", blank=True, null = True)
     nasıl_uygulanır_resimleri = models.ForeignKey(Resim, on_delete=models.CASCADE, blank = True, null = True,verbose_name = "Nasıl Uygulanır Resimleri", related_name= "nasil")
     odul_buttonu_resimleri = models.ForeignKey(Resim, on_delete=models.CASCADE, blank = True, null = True, verbose_name = "Kişiye özel Ödül Butonu Resimleri", related_name = 'odul')
     sayi = models.PositiveIntegerField("Sıralama Sayısı")

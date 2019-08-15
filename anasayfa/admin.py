@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Genel, RenkFont, Slayt, Yorum, Dokuman
+from .models import Genel, Slayt, Yorum, Dokuman
 
 class GenelAdmin(admin.ModelAdmin):
     list_display = ['başlık', 'resim_grubu',]
@@ -23,4 +23,3 @@ admin.site.register(Dokuman, DokumanAdmin)
 admin.site.register(Yorum, YorumAdmin)
 admin.site.register(Slayt, SlaytAdmin)
 admin.site.register(Genel, GenelAdmin)
-admin.site.register(RenkFont)

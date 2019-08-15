@@ -27,7 +27,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 	path('', include('anasayfa.urls')),
 	url(r'^boards/$', views.BoardListView.as_view(), name='home'),
-    path('turnuva/', include('turnuva.urls')),
     #path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/signup/', SignUpView.as_view(), name='signup'),
     #path('accounts/signup/student/', StudentSignUpView.as_view(), name='student_signup'),

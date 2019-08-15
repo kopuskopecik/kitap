@@ -5,14 +5,16 @@
 {% endblock %}
 
 {% block content %}
-
+<a class = "btn btn-block btn-primary" href = "{% url 'orders:istatistikler' %}"> Satış Verileri</a>
 <div class = "row justify-content-md-center">
 	<div class = "col-md-8">
 		<h1 class = "text-center text-info py-0 mb-0">Tüm Siparişler</h1>
 		<div class="card-body">
 			<div class="list-group">
 			{% for siparis in siparisler %}
-			  <a href="{{siparis.get_absolute_url}}" class="list-group-item list-group-item-action list-group-item-info">{{siparis.first_name}} {{siparis.last_name}}</a>
+			  <a href="{{siparis.get_absolute_url}}" class="list-group-item list-group-item-action list-group-item-info">{{siparis.first_name}} {{siparis.last_name}} - 
+				<span class = "badge badge-pill {% if siparis.siparis_durumu == '1' %} badge-danger {% endif %} {% if siparis.siparis_durumu == '2' %} badge-warning {% endif %} {% if siparis.siparis_durumu == '3' %} badge-success {%endif%}">{{siparis.get_siparis_durumu_display}}</span>
+			  </a>
 			{% endfor %}
 			</div>
 		</div>

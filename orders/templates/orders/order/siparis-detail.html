@@ -14,46 +14,47 @@
 			  {% endfor %}
 			</div>
 		</div>
-		<div class = "col-md-9 content icerik">
-			<h1 class = "text-center text-danger headline">		
-				{{siparis.first_name}} {{siparis.last_name}}			
-			</h1>
+		<div class = "col-md-9 icerik tum-siparis-detail">
+			<h2 class = "text-center text-danger headline">		
+				{{siparis.first_name}} {{siparis.last_name}}
+				- <span class = "badge badge-pill badge-warning">{{siparis.get_siparis_durumu_display}}</span>
+			</h2>
 			<div class = "row">
 			<div class = "col-md-6 col-lg-6">
 			<h3 class = "text-left text-danger headline">		
 				Sipariş Bilgileri			
 			</h3>
-			<a href = "{{siparis.siparis_duzenle}}" class = "btn btn-warning">Siparişi Düzenle</a>
-			<a href = "{{siparis.siparis_olustur}}" class = "btn btn-success">Yeni Sipariş Oluştur</a>
+			<a href = "{{siparis.siparis_duzenle}}" class = "btn btn-warning btn-sm">Siparişi Düzenle</a>
+			<a href = "{{siparis.siparis_olustur}}" class = "btn btn-success btn-sm">Yeni Sipariş Oluştur</a>
 			<hr>
-			<p><b>Sipariş Numarası:</b> {{siparis.id}}</p>
-			<p><b>Ödeme Tercihi:</b> {{siparis.get_kargo_tipi_display}}</p>
-			<p><b>Email:</b> {{siparis.email}}</p>
-			<p><b>Adres:</b> {{siparis.address}}</p>
-			<p><b>Şehir:</b> {{siparis.get_city_display}}</p>
-			<p><b>Tarih:</b> {{siparis.created}}</p>
-			<p><b>Ödeme Durumu:</b> {{siparis.paid}}</p>
-			<p><b>Kullanıcı:</b> {{siparis.user.username}}</p>
-			<p><b>Sipariş Durumu:</b> {{siparis.get_siparis_durumu_display}}</p>
-			<p><b>Sipariş Notu:</b> {{siparis.siparis_notu}}</p>
-			<p><b>İndirim Miktarı:</b> {{siparis.indirim_tutari}} TL</p>
-			<p><b>Kargo Tutarı:</b> {{siparis.get_total_kargo}} TL</p>
-			<p><b>Bankacılık Bedeli:</b> {{siparis.banka_bedel}} TL</p>
-			<p><b>Toplam Tutar:</b> {{siparis.get_total_bedel}} TL</p>
-			<p><b>İndirimli Toplam Tutar:</b> {{siparis.get_indirimli_bedel}} TL</p>
+			<p class = "mb-1"><b>Sipariş Numarası:</b> {{siparis.id}}</p>
+			<p class = "mb-1"><b>Ödeme Tercihi:</b> {{siparis.get_kargo_tipi_display}}</p>
+			<p class = "mb-1"><b>Email:</b> {{siparis.email}}</p>
+			<p class = "mb-1"><b>Adres:</b> {{siparis.address}}</p>
+			<p class = "mb-1"><b>Şehir:</b> {{siparis.get_city_display}}</p>
+			<p class = "mb-1"><b>Tarih:</b> {{siparis.created}}</p>
+			<p class = "mb-1"><b>Ödeme Durumu:</b> {{siparis.paid}}</p>
+			<p class = "mb-1"><b>Kullanıcı:</b> {{siparis.user.username}}</p>
+			<p class = "mb-1"><b>Sipariş Durumu:</b> {{siparis.get_siparis_durumu_display}}</p>
+			<p class = "mb-1"><b>Sipariş Notu:</b> {{siparis.siparis_notu}}</p>
+			<p class = "mb-1"><b>İndirim Miktarı:</b> {{siparis.indirim_tutari}} TL</p>
+			<p class = "mb-1"><b>Kargo Tutarı:</b> {{siparis.get_total_kargo}} TL</p>
+			<p class = "mb-1"><b>Bankacılık Bedeli:</b> {{siparis.banka_bedel}} TL</p>
+			<p class = "mb-1"><b>Toplam Tutar:</b> {{siparis.get_total_bedel}} TL</p>
+			<p class = "mb-1"><b>İndirimli Toplam Tutar:</b> {{siparis.get_indirimli_bedel}} TL</p>
 			</div>
 			<div class = "col-md-6">
 				<h3 class = "text-left text-danger headline">		
 				Ürün Bilgileri			
 				</h3>
-				<a href = "{{siparis.urun_ekle}}" class = "btn btn-info">Siparişe Ürün Ekle</a>
+				<a href = "{{siparis.urun_ekle}}" class = "btn btn-info btn-sm">Siparişe Ürün Ekle</a>
 				<hr>
 				{% for urun in siparis.orderitem_set.all %}
-					<p><b>Ürün adı:</b> <a href = "{{urun.product.get_absolute_url}}">{{urun.product.name}}</a></p>
-					<p><b>Ürün Birim Fiyatı:</b> {{urun.price}} TL</p>
-					<p><b>Ürün adedi:</b> {{urun.quantity}}</p>
-					<p><b>Ürün Toplam Tutarı:</b> {{urun.get_cost}} TL</p>
-					<p><b>Ürün İçeriği:</b> {{urun.product.description|safe}}</p>
+					<p class = "mb-1"><b>Ürün adı:</b> <a href = "{{urun.product.get_absolute_url}}">{{urun.product.name}}</a></p>
+					<p class = "mb-1"><b>Ürün Birim Fiyatı:</b> {{urun.price}} TL</p>
+					<p class = "mb-1"><b>Ürün adedi:</b> {{urun.quantity}}</p>
+					<p class = "mb-1"><b>Ürün Toplam Tutarı:</b> {{urun.get_cost}} TL</p>
+					<p class = "mb-1"><b>Ürün İçeriği:</b> {{urun.product.description|safe}}</p>
 					<hr>
 				{% endfor %}
 			</div>

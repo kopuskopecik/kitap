@@ -46,8 +46,7 @@ INSTALLED_APPS = [
 	'shop.apps.ShopConfig',
 	'anasayfa',	
 	'accounts',	
-    'cart.apps.CartConfig',
-	'turnuva',	
+    'cart.apps.CartConfig',	
 	'boards',
 	
 ]
@@ -76,7 +75,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
 				 'cart.context_processors.cart',
-				 'cart.context_processors.anasayfa',
+				 #'cart.context_processors.anasayfa',
 				 
             ],
         },

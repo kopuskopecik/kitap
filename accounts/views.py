@@ -7,7 +7,7 @@ from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 
-from .forms import StudentSignUpForm, TeacherSignUpForm, TurnuvaForm
+from .forms import TeacherSignUpForm
 from .models import User
 #from django.contrib.auth.models import User
 

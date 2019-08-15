@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    İstatistik
+{% endblock %}
+
+{% block content %}
+
+<h2>Son {{gun}} günlük Veriler</h2>
+<hr>
+
+<p> <b>Toplam Satıs Adedi:</b> {{satıs_adedi.adet}}</p>
+<p> <b>Toplam Satıs Tutarı:</b> {{toplam_satıs.toplam}} TL</p>
+
+<h3> Satılan ürünler</h3>
+<hr>
+{% for siparis in siparisler %}
+{% for orderitem in siparis.orderitem_set.all %}
+<p> {{orderitem.quantity}} set {{orderitem.product.name}} {{order.item.price}} </p>
+{% endfor %}
+{% endfor %}
+{% endblock %}

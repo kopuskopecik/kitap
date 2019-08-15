@@ -7,41 +7,58 @@
 {% block content %}
 {% include 'includes/messages.html' %}
 {% if siparisler %}
-<h2 class = "text-center bg-info text-white">Siparişlerim</h2>
-<table class="siparis-tablo table table-sm table-hover table-bordered table-responsive">
-  <thead class ="bg-warning">
-    <tr>
-	  <th style="width: 5%" >No</th>
-      <th style="width: 30%" >Ürünler</th>
-	  <th style="width: 5%" >Sipariş Durumu</th>
-	  <th style="width: 5%" >Tarih</th>
-	  <th style="width: 10%">Ödeme Tercihiniz</th>
-	  <th style="width: 10%" >Sipariş Notu</th>
-	  <th style="width: 10%" >Bankacılık Tutarı</th>
-	  <th style="width: 30%">Ürün Tutarı</th>
-	  <th style="width: 5%">Kargo Tutarı</th>
-	  <th style="width: 10%">Toplam Tutar</th>
-	  
+<h2 class = "text-center bg-info text-white py-1 siparis-basligi">Siparişlerim</h2>
+{% for siparis in siparisler %}
+<table class="table table-sm table-hover table-bordered table-responsive-sm siparis-tablo">
+  <thead class ="bg-warning text-left">
+    <tr class = "table-primary">
+      <th scope="col">Sipariş- {{forloop.counter}} Bigileri</th>
+	  <th scope="col">Değer</th>
     </tr>
   </thead>
-  <tbody class = "tbody-alani">
-{% for siparis in siparisler %}
-	<tr>
-		<td>{{forloop.counter}}</td>
-		<td style="width: 30%">{% for urun in siparis.orderitem_set.all %} <small>{{urun.quantity}} set <a href = "{{urun.product.get_absolute_url}}">{{ urun.product.name }}</a>, </small>{% endfor %}</td>
-		<td class = "text-danger">{{ siparis.get_siparis_durumu_display }}</td>
-		<td>{{ siparis.created|timesince}} önce</td>
-		<td>{{ siparis.get_kargo_tipi_display }}</td>
-		<td>{% if not urun.order.siparis_notu%} Yok {% else %} {{ urun.order.siparis_notu }} {% endif%}</td>
-		<td>{{ siparis.banka_bedel }} TL</td>
-		<td>{% for urun in siparis.orderitem_set.all %} {{urun.quantity}} set <a href = "{{urun.product.get_absolute_url}}">{{ urun.product.name }}</a> <b>{{urun.get_cost}} TL</b>, {% endfor %}</td>
-		<td>{{ siparis.get_total_kargo }} TL</td>
-		<td class = "text-danger">{% if siparis.indirim_tutari > 0 %} <s>{{ siparis.get_total_bedel }} TL</s> <b>{{siparis.get_indirimli_bedel}} TL</b> {% else %} <b>{{ siparis.get_total_bedel }} TL</b> {% endif %}</td>
-		
-	</tr>	
+  <tbody class = "table-success">
+  
+  <tr>
+    <td>Sipariş Numarası:</td>
+<td>{{siparis.get_siparis_no}}</td>  </tr>
+  <tr>
+    <td>Siparişte Son Durum:</td>
+<td class = "text-danger">{{siparis.get_siparis_durumu_display}}</td>  </tr>
+  <tr>
+    <td>Tarih:</td>
+<td>{{siparis.created}}</td>  </tr>
+  <tr>
+    <td>Ödeme Tercihiniz:</td>
+<td>{{siparis.get_kargo_tipi_display}}</td>  </tr>
+   <tr>
+    <td>Sipariş Notunuz</td>
+<td>{{siparis.siparis_notu}}</td>  </tr>
+  
+  {% for urun in siparis.orderitem_set.all %}  
+  <tr>
+    <td>{{urun.quantity}} set {{ urun.product.name }} tutarı:</td>
+    <td>{{ urun.get_cost }} TL</td>
+  </tr>
+
 {% endfor %}
+	
+  <tr>
+    <td>Ürünlerin Toplam Fiyatı:</b></td>
+    <td colspan="num">{{ siparis.get_total_cost }} TL</td>
+  </tr>
+  <tr>
+    <td>'Yurtiçi' Kargo Ücreti:</b></td>
+    <td colspan="num">{{ siparis.get_total_kargo }} TL</td>
+  </tr>
+    <tr>
+    <td>Toplam:</td>
+	<td class = "text-danger">{% if siparis.indirim_tutari > 0 %} <s>{{ siparis.get_total_bedel }} TL</s> <b>{{siparis.get_indirimli_bedel}} TL</b> {% else %} <b>{{ siparis.get_total_bedel }} TL</b> {% endif %}</td>
+  </tr>
+  
   </tbody>
 </table>
+
+{% endfor %}
 {% else %}
 <p> Üye olarak gerçekleştirdiğiniz bir sipariş bulunmamaktadır.</p>
 {% endif %}

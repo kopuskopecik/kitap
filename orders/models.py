@@ -34,6 +34,7 @@ class Order(models.Model):
     siparis_durumu = models.CharField('Sipariş Durumu:', max_length=10, choices=SIPARIS_DURUMLARI, default = "1")
     siparis_notu = models.TextField("Sipariş Notu:", blank = True)
     indirim_tutari = models.PositiveIntegerField("İndirim Miktarı", default=0)
+    toplam_urun_tutarı = models.PositiveIntegerField("Ürün bedeli", default=0)
 	
     class Meta:
         ordering = ('-created', )
@@ -46,6 +47,13 @@ class Order(models.Model):
 	
     def get_absolute_url(self):
         return reverse('orders:siparis-detail', kwargs={'id':self.id})
+	
+    def save(self, *args, **kwargs):
+        self.toplam_urun_tutarı = self.get_total_cost()       
+        return super(Order, self).save(*args, **kwargs)
+		
+    def get_siparis_no(self):
+        return self.id + 156789
 		
     def urun_ekle(self):
         return reverse('orders:siparis-detail-urun-ekle', kwargs={'id':self.id})

@@ -8,6 +8,7 @@ from django.contrib import messages
 @login_required
 def siparislerim(request):
 	siparisler = Order.objects.filter(user = request.user)
+	urunler = OrderItem.objects.filter(order__user = request.user)
 	print(siparisler)
 	context = {
 		'siparisler': siparisler,
@@ -20,13 +21,76 @@ def tum_siparisler(request):
 	if not request.user.is_superuser:
 		return redirect('/') 
 	
+	
 	siparisler = Order.objects.all()
-	print(siparisler)
 	context = {
 		'siparisler': siparisler,
 	}
 	
 	return render(request, 'orders/order/siparislerin_hepsi.html', context)
+
+def istatistik (request, gun):
+	if not request.user.is_superuser:
+		return redirect('/') 
+	# bir yıl önceki zamana gidelim
+	from datetime import datetime, timedelta
+	from django.db.models import Avg, Count, Sum
+
+	now = datetime.today()
+	zaman_farkı = timedelta(gun)
+	geçmiş = now - zaman_farkı
+	
+	siparisler = Order.objects.filter(created__gte = geçmiş)
+	satıs_adedi = siparisler.aggregate(adet = Sum("orderitem__quantity"))
+	toplam_satıs = siparisler.aggregate(toplam = Sum("toplam_urun_tutarı"))
+	
+	context = {
+		'satıs_adedi': satıs_adedi,
+		'toplam_satıs': toplam_satıs,
+		'gun': gun,
+		'siparisler': siparisler,
+	}
+	
+	return render(request, 'orders/order/istatistik.html', context)
+
+def istatistikler (request):
+	if not request.user.is_superuser:
+		return redirect('/') 
+	# bir yıl önceki zamana gidelim
+	
+	gunler = {
+	
+		"bugün": 1, 
+		"2 gün": 2, 
+		"3 gün": 3, 
+		"4 gün": 4,
+		"5 gün": 5, 
+		"6 gün": 6, 
+		'1 hafta': 7,		
+		'2 hafta': 14, 
+		'3 hafta': 21,
+		'1 ay': 30, 
+		'2 ay': 60, 
+		'3 ay': 90, 
+		'4 ay': 120, 
+		'5 ay': 150, 
+		'6 ay': 180,
+		'7 ay': 210,
+		'8 ay': 240,
+		'9 ay': 270,
+		'10 ay': 300,
+		'11 ay': 330,
+		'1 yıl': 365,
+	
+	}
+	
+	
+	
+	context = {
+		'gunler': gunler,
+	}
+	
+	return render(request, 'orders/order/istatistikler.html', context)
 
 def siparis_detail(request, id):
 	if not request.user.is_superuser:

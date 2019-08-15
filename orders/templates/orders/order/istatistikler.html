@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Siparişiniz
+{% endblock %}
+
+{% block content %}
+  {% for key, value in gunler.items %}
+	<a href = "{% url 'orders:istatistik' value %}" class = "btn btn-lg btn-primary btn-block">{{key}}</a>
+  {% endfor %}
+
+
+{% endblock %}

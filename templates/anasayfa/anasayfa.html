@@ -6,28 +6,11 @@
 <div class = "row">
   <div class = "col-md-4 col-sm-12 sol">
       <div class="card mb-2 text-center border border-white">
-		<div class="card-header text-white {{anasayfa.kategorilerim_yazısı_arka_plan_rengi}} {{anasayfa.kategorilerim_yazı_rengi}} py-0" style="font-size: {{anasayfa.kategorilerim_yazı_boyutu}}px;">İLKOKUL-ORTAOKUL</div>
-		<div class="card-body bg-secondary {{anasayfa.kategorilerim_arka_plan_rengi}}">
-        {% for category in ana_kategoriler%}
-		  {% if forloop.counter <= 3 %}
-	        <a href = "{{category.get_absolute_url}}" type="button" class=" rounded-circle btn {{anasayfa.ilk_üç_button}} btn-sm btn-block " style="font-size: {{anasayfa.buttonlar_yazı_büyüklüğü}}px;">{{category.name}}</a>
-	      {% endif %}
-          {% if forloop.counter == 4 %}
-	        <a href = "{{category.get_absolute_url}}" type="button" class="btn {{anasayfa.dördüncü_button}} btn-sm btn-block" style="font-size: {{anasayfa.buttonlar_yazı_büyüklüğü}}px;">{{category.name}}</a>
-	      {% endif %}
-	      {% if forloop.counter == 5 %}
-	        <a href = "{{category.get_absolute_url}}" type="button" class="btn {{anasayfa.beşinci_button}} btn-sm btn-block" style="font-size: {{anasayfa.buttonlar_yazı_büyüklüğü}}px;">{{category.name}}</a>
-	      {% endif %}
-	      {% if forloop.counter == 6 %}
-	        <a href = "{{category.get_absolute_url}}" type="button" class="btn {{anasayfa.altıncı_button}} btn-sm btn-block" style="font-size: {{anasayfa.buttonlar_yazı_büyüklüğü}}px;">{{category.name}}</a>
-	      {% endif %}
-	      {% if forloop.counter == 7 %}
-	        <a href = "{{category.get_absolute_url}}" type="button" class="btn {{anasayfa.yedinci_button}} btn-sm btn-block" style="font-size: {{anasayfa.buttonlar_yazı_büyüklüğü}}px;">{{category.name}}</a>
-	      {% endif %}
-		  {% if forloop.counter == 8 %}
-	        <a href = "{{category.get_absolute_url}}" type="button" class="btn {{anasayfa.sekizinci_button}} btn-sm btn-block" style="font-size: {{anasayfa.buttonlar_yazı_büyüklüğü}}px;">{{category.name}}</a>
-	      {% endif %}
-	   {% endfor %} 
+		<div class="card-header bg-danger text-white py-0">İLKOKUL-ORTAOKUL</div>
+		<div class="card-body">
+        {% for category in ana_kategoriler%}		 
+	        <a href = "{{category.get_absolute_url}}" type="button" class="btn {{category.arka_plan_renk}} btn-sm btn-block">{{category.name}}</a>
+	   	{% endfor %} 
 		</div>
     </div>
   </div>
@@ -79,7 +62,7 @@
 	</div>
 </div>
 </div>
-<div class="card-header w-100 text-white mt-3 {{anasayfa.urunler_arka_plan_rengi}} text-center  py-0" style="font-size: {{anasayfa.urunler_yazı_boyutu}}px;">ÜRÜNLERİMİZ</div>
+<div class="card-header w-100 text-white mt-3 bg-danger text-center py-0">ÜRÜNLERİMİZ</div>
 <div class="row">
 {% for urun in urunler%}
 <div class = "col-lg-3 col-md-4 col-sm-6 mb-2">
@@ -111,7 +94,7 @@
   <div class="card border-danger h-100 text-center">
     <div class="card-header bg-danger py-1"><a class = "text-white" href = "{{konu.get_absolute_url}}">{{konu.başlık}}</a></div>
     <div class="card-body py-1">
-      <p class="card-text">{{konu.kısa_içerik|safe|truncatechars:150}}</p>	 
+      <p class="card-text">{{konu.kısa_içerik|safe|truncatechars:100}}</p>	 
     </div>
   </div>   
 </div>

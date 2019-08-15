@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, HttpResponse
 from django.views import generic
 from django.contrib.messages.views import SuccessMessageMixin
 
-from .models import Genel, RenkFont, Slayt, Yorum, Dokuman
+from .models import Genel, Slayt, Yorum, Dokuman
 
 from shop.models import Category, Product, AnaCategory
 

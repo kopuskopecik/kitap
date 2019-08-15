@@ -1,4 +1,4 @@
-{% extends 'base_accounts.html' %}
+{% extends 'base.html' %}
 
 {% block title %}Kitap Turnıvasına Kayıt Ol{% endblock %}
 
@@ -9,8 +9,8 @@
   <h5 class="card-header bg-warning">Siparişi Tamamla</h5>
   <div class="card-body">
     <h5 class="card-title">Siparişinizi sitemizden takip etmek isterseniz üye olabilirsiniz. </h5>
-    <a href="{% url 'teacher_signup' %}?next={{request.path}}" class="btn btn-success btn-lg" role="button">Üye ol</a>
-    <a href="{% url 'orders:order_create' %}" class="btn btn-info btn-lg" role="button">Üye olmadan devam et</a>
+    <a href="{% url 'teacher_signup' %}?next={{request.path}}" class="btn btn-success btn-lg mb-1" role="button">Üye ol</a>
+    <a href="{% url 'orders:order_create' %}" class="btn btn-info btn-lg mb-1" role="button">Üye olmadan devam et</a>
   </div>
 </div>
 </div>

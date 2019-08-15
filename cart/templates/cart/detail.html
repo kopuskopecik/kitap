@@ -7,7 +7,7 @@
 {% block content %}
 {% include 'includes/messages.html' %}
 {% with totail_items=cart|length %}
-  <h4 class = "table-bordered bg-success text-white text-center mb-0 mt-3 py-2">
+  <h4 class = "table-bordered bg-success text-white text-center mb-0 mt-3 py-1 siparis-basligi">
   {% if cart|length > 0 %}
 	Sepetiniz
   {% else %}
@@ -15,7 +15,7 @@
   {% endif %}
 {% endwith %}
   </h4>
-<table class="table table-hover table-bordered table-responsive-sm">
+<table class="table table-sm table-hover table-bordered table-responsive-sm siparis-tablo">
   <thead >
     <tr>
       <th scope="col">Ürün</th>
@@ -71,7 +71,7 @@
   </tbody>
 </table>
 <div class="text-right">
-  <a href="{% url 'anasayfa:anasayfa' %}" class="btn btn-info">Alışverişe Devam</a>
-  <a href="{% if request.user.is_authenticated%}{% url 'orders:order_create' %} {% else %} {% url 'uyelik' %}{% endif %}" class="btn btn-success">Tamamla</a>
+  <a href="{% url 'anasayfa:anasayfa' %}" class="btn btn-info mb-1">Alışverişe Devam</a>
+  <a href="{% if request.user.is_authenticated%}{% url 'orders:order_create' %} {% else %} {% url 'uyelik' %}{% endif %}" class="btn btn-success mb-1">Tamamla</a>
 </div>
 {% endblock %}
