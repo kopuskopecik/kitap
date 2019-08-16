@@ -23,7 +23,7 @@ class CategoryAdmin(admin.ModelAdmin):
 	fields = (
 		'ana_kategori',
 		('name', 'slug'),
-		('image1', 'nasıl_uygulanır_resimleri'),
+		('image1', 'image2', 'nasıl_uygulanır_resimleri'),
 		('sayi', 'madalyalı_mı', 'sayfa_sayısı', 'aktif'),
 	)
 

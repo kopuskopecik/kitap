@@ -25,6 +25,12 @@ class AnaSayfa(generic.ListView):
 			diger_slaytlar = slaytlar[1:]
 			context["ilk_slayt"] = ilk_slayt
 			context["diger_slaytlar"] = diger_slaytlar
+		
+		session_key = 'viewed_topic_{}'.format("deneme")
+		if not self.request.session.get(session_key, False):
+			context["modal"] = "myModal"
+			self.request.session[session_key] = True
+		
 		context["urunler"] = urunler
 		context["genel"] = genel
 		return context

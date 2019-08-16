@@ -138,6 +138,11 @@
     <script src="{% static 'js/jquery9.min.js' %}"></script>
     <script src="{% static 'js/popper9.min.js' %}"></script>
     <script src="{% static 'js/bootstrap9.min.js' %}"></script>
+	<script type="text/javascript">
+		$(window).on('load', function(){
+			$('#myModal').modal('show');		
+		});
+	</script>
     {% block javascript %}{% endblock %}
   </body>
 </html>
