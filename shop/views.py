@@ -54,9 +54,9 @@ def product_filter_list(request, sayi):
 def category_product_list(request, category_slug):
     category = get_object_or_404(AnaCategory, slug=category_slug, aktif = True)
     if not category.bireysel_mi:
-        products = Product.objects.filter(category__ana_kategori=category, aktif = True,  ogrenci_sayisi = "c").order_by("category__sayi")
+        products = Product.objects.filter(category__ana_kategori=category, category__ana_kategori__aktif = True, aktif = True,  ogrenci_sayisi = "c").order_by("category__sayi")
     else:
-        products = Product.objects.filter(category__ana_kategori=category, aktif = True).order_by("category__sayi")
+        products = Product.objects.filter(category__ana_kategori=category, category__ana_kategori__aktif = True, aktif = True).order_by("category__sayi")
     categories = AnaCategory.objects.exclude(slug = category_slug).filter(aktif = True).order_by('sıralama_sayısı')
 
     ogrenci_sayısı = (
@@ -80,7 +80,7 @@ def category_product_list(request, category_slug):
 
 def category_product_filter_list(request, category_slug, sayi):
     category = get_object_or_404(AnaCategory, slug=category_slug, aktif = True)
-    products = Product.objects.filter(category__ana_kategori=category, ogrenci_sayisi = sayi).order_by("category__sayi")
+    products = Product.objects.filter(category__ana_kategori=category, ogrenci_sayisi = sayi, aktif = True, category__ana_kategori__aktif = True).order_by("category__sayi")
     categories = AnaCategory.objects.exclude(slug = category_slug).filter(aktif =True).order_by('sıralama_sayısı')
 
     ogrenci_sayısı = (
@@ -105,8 +105,8 @@ def category_product_filter_list(request, category_slug, sayi):
 
 
 def product_detail(request, id, slug):
-    product = get_object_or_404(Product, id=id, slug=slug, category__ana_kategori__aktif = True)
-    products = Product.objects.exclude(ogrenci_sayisi = product.ogrenci_sayisi).filter(category__ana_kategori = product.category.ana_kategori, category = product.category)
+    product = get_object_or_404(Product, id=id, slug=slug, category__ana_kategori__aktif = True, aktif = True)
+    products = Product.objects.exclude(ogrenci_sayisi = product.ogrenci_sayisi).filter(category__ana_kategori = product.category.ana_kategori, category = product.category, category__ana_kategori__aktif = True, aktif = True).order_by('ogrenci_sayisi')
     print("")
     print(products)
     print("")
@@ -119,7 +119,7 @@ def product_detail(request, id, slug):
     return render(request, 'shop/product/detail.html', context)
 
 def product_detail_nasil_uygulanir(request, id, slug):
-    product = get_object_or_404(Product, id=id, slug=slug)
+    product = get_object_or_404(Product, id=id, slug=slug, category__ana_kategori__aktif = True, aktif = True)
     context = {
         'product': product,
     }

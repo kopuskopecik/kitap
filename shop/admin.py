@@ -44,7 +44,8 @@ class ProductAdmin(admin.ModelAdmin):
 
 
 class ResimAdmin(admin.ModelAdmin):
-    list_display = ['isim',]
+    list_display = ['isim', 'sıralama_sayısı']
+    list_editable = ['sıralama_sayısı', ]
     list_filter = ['isim',]
 	
     #readonly_fields = ('tekresimler',)

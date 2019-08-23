@@ -75,14 +75,16 @@ class TekliResim(models.Model):
 class Resim(models.Model):
 	isim = models.CharField("resim adı", max_length=100)
 	resimler = models.ManyToManyField(TekliResim, verbose_name = "resimler", blank=True)
+	sıralama_sayısı = models.PositiveIntegerField("Sıralama Sayısı", default = 0)
 
 	class Meta:
-		ordering = ('isim', )
+		ordering = ('sıralama_sayısı', 'isim')
 		verbose_name = 'Resim-Grubu'
 		verbose_name_plural = 'Resim-Grupları'
 
 	def __str__(self):
 		return self.isim
+	
 
 class Category(models.Model):
     ana_kategori = models.ForeignKey(AnaCategory, on_delete=models.CASCADE, verbose_name = "Ana Kategori", related_name = "altkategoriler")
@@ -99,7 +101,7 @@ class Category(models.Model):
     
 
     class Meta:
-        ordering = ('sayi', )
+        ordering = ('sayi',)
         verbose_name = 'Kategori'
         verbose_name_plural = 'Kategoriler'
 
@@ -124,7 +126,7 @@ class Product(models.Model):
     sıralama_sayısı = models.PositiveIntegerField("Anasayfa Sıralama Sayısı", default = 0)
     
     class Meta:
-        ordering = ('sıralama_sayısı', 'ogrenci_sayisi', )
+        ordering = ('sıralama_sayısı', )
         index_together = (('id', 'slug'),)
         verbose_name = 'Ürün'
         verbose_name_plural = "Ürünler"
