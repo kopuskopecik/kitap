@@ -15,10 +15,13 @@
 {% endif %}
   <div class="card-body">
     <p class="card-text">{{ileti.mesaj}}</p>
-	<p class="card-text text-right"><b>{{ileti.user}}</b></p>
-	{% if request.user == ileti.user %}
-		<a class = "btn btn-warning" href = "{% url 'mesaj:mesaj-update' ileti.id %}">Düzenle</a>
-    {% endif %}
+	<p class="card-text text-right"><b>{{ileti.user}}</b>
+	
+		{% if request.user == ileti.user %}
+			<a class = "btn btn-warning" href = "{% url 'mesaj:mesaj-update' ileti.id %}">Düzenle</a>
+		{% endif %}
+	</p>
+	
   </div>
 </div>
 
