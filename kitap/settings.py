@@ -49,11 +49,9 @@ INSTALLED_APPS = [
 	'anasayfa',	
 	'accounts',	
     'cart.apps.CartConfig',	
-	'boards',
 	
 ]
 
-SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
