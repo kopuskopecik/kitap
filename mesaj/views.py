@@ -44,8 +44,11 @@ def update(request, id):
 		return Http404()
 	
 	mesaj = get_object_or_404(Entry, id=id)
+	if not mesaj == Entry.objects.first() 
+		son_mesaj	= mesaj.get_previous_by_publishing_date()
+	else:
+		son_mesaj	= Entry.objects.all().first()
 	
-	son_mesaj	= mesaj.get_previous_by_publishing_date()
 	form = MesajForm(request.POST or None, request.FILES or None, instance = mesaj)
 	if form.is_valid():
 		mesaj=form.save(commit = False)
