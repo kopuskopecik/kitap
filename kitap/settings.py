@@ -48,7 +48,8 @@ INSTALLED_APPS = [
 	'shop.apps.ShopConfig',
 	'anasayfa',	
 	'accounts',	
-    'cart.apps.CartConfig',	
+    'cart.apps.CartConfig',
+	'mesaj',
 	
 ]
 
