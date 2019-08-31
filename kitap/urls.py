@@ -19,6 +19,7 @@ from django.conf.urls import url
 from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.generic import TemplateView
 
 from boards import views
 from accounts.views import TeacherSignUpView, UserUpdateView, SignUpView, UyelikView
@@ -32,6 +33,7 @@ urlpatterns = [
     #path('accounts/signup/student/', StudentSignUpView.as_view(), name='student_signup'),
     path('accounts/signup/teacher/', TeacherSignUpView.as_view(), name='teacher_signup'),
 	#path('accounts/turnuva/', turnuva, name='turnuva'),
+	path('google102aeaa3d2712612.html', TemplateView.as_view(template_name="google102aeaa3d2712612.html")),
     
 	path('uyelik/', UyelikView.as_view(), name = 'uyelik'),
 	path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
