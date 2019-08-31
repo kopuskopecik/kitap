@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %} Ürünler {% endblock %}
+{% block title %} {{category.name}} {% endblock %}
+{% block metalar %}
+		<meta name="description" content="{{category.name}}'e ait ürünlerine bu sayfadan erişebilirsiniz.">
+		<meta name="keywords" content="{{category.name}}">
+{% endblock %}
 
 {% block content %} 
  <div class = "row justify-content-md-center justify-content-sm-center justify-content-lg-center">

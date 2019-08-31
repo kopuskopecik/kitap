@@ -2,7 +2,10 @@
 
 {% block title %}{{object.başlık}}{% endblock %}
 
-
+{% block metalar %}
+		<meta name="description" content="{{object.başlık}}'e yönelik bilgilere sayfamızdan erişebilirsiniz.">
+		<meta name="keywords" content="{{object.başlık}}">
+{% endblock %}
 
 
 {% block content %}

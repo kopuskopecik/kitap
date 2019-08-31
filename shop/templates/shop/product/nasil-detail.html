@@ -1,7 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}
-    {{product.name}}-nasıl uygulanır}
+    {{product.name}}-nasıl uygulanır
+{% endblock %}
+
+{% block metalar %}
+		<meta name="description" content="{{product.name}} ürünün nasıl uygulandığına dair bilgilere bu sayfamızdan erişebilirsiniz.">
+		<meta name="keywords" content="{{product.name}} uygulanması">
 {% endblock %}
 
 {% block content %}
