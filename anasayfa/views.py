@@ -75,4 +75,10 @@ def deneme(request):
         # response = HttpResponse(template_output)
         response['Content-Disposition'] = 'attachment;filename=name.docx'
         return response
+
+
+def view_404(request, exception):
+    # make a redirect to homepage
+    # you can use the name of url or just the plain link
+    return redirect('/')
     
