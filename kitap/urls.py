@@ -33,6 +33,8 @@ sitemaps = {
 	'genel': GenelSitemap,
 }
 
+handler404 = 'anasayfa.views.view_404'
+
 urlpatterns = [
     path('admin/', admin.site.urls),
 	path('', include('anasayfa.urls')),
