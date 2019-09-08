@@ -2,6 +2,9 @@ from django.db import models
 from shop.models import Product
 from accounts.models import User
 from django.urls import reverse
+from django.core.exceptions import ValidationError
+from django.utils.translation import gettext_lazy as _
+#from phone_field import PhoneField
 
 from cart.models import Kargo
 
@@ -26,6 +29,7 @@ class Order(models.Model):
     last_name = models.CharField("Soyadınız:",max_length=60)
     email = models.EmailField()
     address = models.TextField("Adres:")
+    phone = models.CharField("Telefon No:", blank=True, help_text='İrtibat Numarası', max_length=11)
     city = models.CharField('Şehir:', max_length=10, choices=ILLER)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -44,6 +48,11 @@ class Order(models.Model):
 
     def __str__(self):
         return 'Sipariş {}'.format(self.id)
+		
+    def clean(self):
+        if not 9 < len(self.phone) < 12:
+            raise ValidationError({'phone': _('Telefon Numaranız 10 ya da 11 haneli olmalıdır. Örneğin 05321111111 ya da 5321111111')})
+			
 	
     def get_absolute_url(self):
         return reverse('orders:siparis-detail', kwargs={'id':self.id})

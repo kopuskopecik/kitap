@@ -5,7 +5,7 @@ from .models import Order, OrderItem
 class OrderCreateForm(forms.ModelForm):
     class Meta:
         model = Order
-        fields = ['kargo_tipi','first_name', 'last_name', 'email', 'address', 'city', 'siparis_notu']
+        fields = ['kargo_tipi','first_name', 'last_name', 'phone', 'email', 'address', 'city', 'siparis_notu']
 
 
 class OrderItemForm(forms.ModelForm):
@@ -16,5 +16,5 @@ class OrderItemForm(forms.ModelForm):
 class SiparisForm(forms.ModelForm):
 	class Meta:
 		model = Order
-		fields = ['kargo_tipi','first_name', 'last_name', 'email', 'address', 'city', 'siparis_notu', "siparis_durumu", "indirim_tutari", "user"]
+		fields = ['kargo_tipi','first_name', 'last_name', 'phone', 'email', 'address', 'city', 'siparis_notu', "siparis_durumu", "indirim_tutari", "user"]
 		

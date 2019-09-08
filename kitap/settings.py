@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 	'django_cleanup',
 	'ckeditor',
 	'crispy_forms',
+	#'phone_field',
 	
 	'orders.apps.OrdersConfig',
 	'shop.apps.ShopConfig',
