@@ -14,7 +14,7 @@
   <img src="{{ileti.resim.url}}" class="card-img-top img-responsive" alt="{{resim}}">
 {% endif %}
   <div class="card-body">
-    <p class="card-text">{{ileti.mesaj}}</p>
+    <p class="card-text">{{ileti.mesaj|safe}}</p>
 	<p class="card-text text-right"><b>{{ileti.user}}</b>
 	
 		{% if request.user == ileti.user %}
