@@ -30,12 +30,13 @@
   <a href = "{{product.get_nasil_url}}" type="button" class="btn btn-primary btn-sm btn-block mx-auto mb-2">Nasıl Uygulanır?</a>
   {% endif %}
   {% if product.category.ana_kategori.sayfa_durumu %}
-  <p class = "mb-0">Öğrenci Sayısı</p>
-	<div class="btn-group mt-1" role="group" aria-label="Basic example">
+  <p class = "mx-auto mb-0">Öğrenci Sayısı</p>
+	<div class="d-flex btn-group mt-1 justify-content-center" role="group" aria-label="Basic example">
 	  {% for product in products %}
-		<a href = "{{product.get_absolute_url}}"type="button" class="btn btn-success">{{product.get_ogrenci_sayisi_display}}</a>
+		<a href = "{{product.get_absolute_url}}"type="button" class="btn btn-success btn-sm">{{product.get_ogrenci_sayisi_display}}</a>
 	  {% endfor %}
 	</div>
+  
   {% endif %}
     <h5 class="card-title urun-basligi">{{product.name}}</h5>
 	<form class = "form-inline justify-content-center" action="{% url 'cart:cart_add' product.id %}" method="post">
