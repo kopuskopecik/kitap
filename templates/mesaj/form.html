@@ -9,7 +9,7 @@
   <img src="{{ileti.resim.url}}" class="card-img-top img-responsive" alt="{{resim}}">
 {% endif %}
   <div class="card-body">
-    <p class="card-text">{{son_mesaj.mesaj}}</p>
+    <p class="card-text">{{son_mesaj.mesaj|safe}}</p>
 	<p class="card-text text-right"><b>{{ileti.user}}</b></p>
   </div>
 </div>
