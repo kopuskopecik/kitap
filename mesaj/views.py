@@ -63,3 +63,12 @@ def update(request, id):
 	}
 
 	return render(request, 'mesaj/form.html',context)
+
+def sil(request, id):
+	if not request.user.is_superuser:
+		return Http404()
+	
+	mesaj = get_object_or_404(Entry, id=id)
+	mesaj.delete()
+	return redirect("mesaj:mesajlar")
+	

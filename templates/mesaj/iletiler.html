@@ -19,6 +19,7 @@
 	
 		{% if request.user == ileti.user %}
 			<a class = "btn btn-warning" href = "{% url 'mesaj:mesaj-update' ileti.id %}">Düzenle</a>
+			<a class = "btn btn-danger" href = "{% url 'mesaj:mesaj-delete' ileti.id %}">Sil</a>
 		{% endif %}
 	</p>
 	

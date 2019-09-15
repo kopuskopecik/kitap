@@ -16,4 +16,7 @@ class Entry(models.Model):
 	def __str__(self):
 		return self.user.username
 		
+	def get_delete_url(self):
+		return reverse('mesaj:mesaj-delete', kwargs={'id':self.id})
+		
 	
