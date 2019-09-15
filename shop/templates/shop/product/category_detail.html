@@ -55,7 +55,8 @@
          <a href = "{{product.get_absolute_url }}">{% if product.category.image1 %}
 		   <img class="card-img-top img-responsive" src="{{product.category.image1.url}}" alt="{{product.name}}">{% endif %}
 		 </a>
-		         <div class="card-footer py-1">
+		         <div class="card-footer py-1 px-0">
+				 <a href = "{{product.get_absolute_url}}" type="button" class="btn btn-success btn-sm btn-block mb-1 w-100">Ürünü İncele</a>
                 <small class="font-weight-bold">{{product.price}} TL</small>
 	  {% if not product.category.ana_kategori.indirim_miktarı == 0 %}
 	  <small class="text-muted"><s>{{product.pahalı_fiyat_hesapla}} TL </s></small>
