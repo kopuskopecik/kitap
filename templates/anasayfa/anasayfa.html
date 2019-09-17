@@ -79,16 +79,19 @@
    <a href = "{{urun.get_absolute_url}}"> {% if urun.category.image1 %}<img class="card-img-top img-responsive" src="{{urun.category.image1.url}}" alt="{{urun.name}}">{% endif %}
 	</a>
 	<div class="card-footer text-center py-1 px-0">
-		<a href = "{{urun.get_absolute_url}}" type="button" class="btn btn-success btn-sm btn-block mb-1 w-100">Ürünü İncele</a>
       <small class="font-weight-bold">{{urun.price}} TL</small>
 	  {% if not urun.category.ana_kategori.indirim_miktarı == 0 %}
 	  <small class="text-muted"><s>{{urun.pahalı_fiyat_hesapla}} TL </s></small>
 	  {% endif %}
     </div>
     <div class="card-body text-center px-0 py-0">
-	{% if not urun.category.ana_kategori.sadece_madalyalı_mı %}
-	<a href = "{{urun.get_nasil_url}}" type="button" class="btn btn-primary btn-sm btn-block mb-1">Nasıl Uygulanır?</a>
-    {% endif %}  
+	
+	<div class="btn-group btn-group-sm justify-content-between w-100 mb-1" role="group" aria-label="Basic example">
+  {% if not urun.category.ana_kategori.sadece_madalyalı_mı %}
+	<a href = "{{urun.get_nasil_url}}" type="button" class="btn btn-primary">Nasıl Uygulanır?</a>
+    {% endif %}
+	<a href = "{{urun.get_absolute_url}}" type="button" class="btn btn-success">Ürünü İncele</a>
+</div>
 	  <h6 class="card-title urun-basligi my-auto">{{urun.name}}</h6>
 	</div>
 
