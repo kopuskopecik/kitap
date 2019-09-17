@@ -63,10 +63,10 @@
         </div>
          <div class="card-body px-0 py-0">
 		   	<div class="btn-group btn-group-sm justify-content-between w-100 mb-1" role="group" aria-label="Basic example">
-  {% if not urun.category.ana_kategori.sadece_madalyalı_mı %}
-	<a href = "{{urun.get_nasil_url}}" type="button" class="btn btn-primary">Nasıl Uygulanır?</a>
+  {% if not product.category.ana_kategori.sadece_madalyalı_mı %}
+	<a href = "{{product.get_nasil_url}}" type="button" class="btn btn-primary">Nasıl Uygulanır?</a>
     {% endif %}
-	<a href = "{{urun.get_absolute_url}}" type="button" class="btn btn-success">Ürünü İncele</a>
+	<a href = "{{product.get_absolute_url}}" type="button" class="btn btn-success">Ürünü İncele</a>
 </div>
            <h5 class="card-title urun-basligi my-auto">{{product.name}}</h5>
          </div>  
