@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from .models import OrderItem, Order
+from shop.models import Product, AnaCategory
 from .forms import OrderCreateForm, OrderItemForm, SiparisForm
 from cart.cart import Cart
 from django.contrib import messages
@@ -40,15 +41,32 @@ def istatistik (request, gun):
 	zaman_farkı = timedelta(gun)
 	geçmiş = now - zaman_farkı
 	
+	küme = set()
+	liste = []
+	
+	küme1 = []
+	
 	siparisler = Order.objects.filter(created__gte = geçmiş)
 	satıs_adedi = siparisler.aggregate(adet = Sum("orderitem__quantity"))
 	toplam_satıs = siparisler.aggregate(toplam = Sum("toplam_urun_tutarı"))
+	
+	siparis_elemanları = OrderItem.objects.filter(order__created__gte = geçmiş)
+	urunler = Product.objects.filter(orderitem__order__created__gte = geçmiş)
+	urun_sayısı = urunler.annotate(sayi = Sum("orderitem__quantity"))
+	kategoriler = AnaCategory.objects.filter(altkategoriler__product__orderitem__order__created__gte = geçmiş)
+	kategori_sayısı = kategoriler.annotate(adet = Sum("altkategoriler__product__orderitem__quantity"))
+	
+		
+	
 	
 	context = {
 		'satıs_adedi': satıs_adedi,
 		'toplam_satıs': toplam_satıs,
 		'gun': gun,
 		'siparisler': siparisler,
+		'urunler':urunler,
+		'urun_sayısı': urun_sayısı,
+		'kategori_sayısı': kategori_sayısı,
 	}
 	
 	return render(request, 'orders/order/istatistik.html', context)
