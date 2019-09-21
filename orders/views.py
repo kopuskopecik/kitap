@@ -5,6 +5,7 @@ from shop.models import Product, AnaCategory
 from .forms import OrderCreateForm, OrderItemForm, SiparisForm
 from cart.cart import Cart
 from django.contrib import messages
+from django.db.models import Avg, Count, Sum
 
 @login_required
 def siparislerim(request):
@@ -35,7 +36,7 @@ def istatistik (request, gun):
 		return redirect('/') 
 	# bir yıl önceki zamana gidelim
 	from datetime import datetime, timedelta
-	from django.db.models import Avg, Count, Sum
+	
 
 	now = datetime.today()
 	zaman_farkı = timedelta(gun)
@@ -76,6 +77,8 @@ def istatistikler (request):
 		return redirect('/') 
 	# bir yıl önceki zamana gidelim
 	
+	
+	
 	gunler = {
 	
 		"bugün": 1, 
@@ -112,11 +115,53 @@ def istatistikler (request):
 	
 	
 	
+	
 	context = {
 		'gunler': gunler,
 	}
 	
 	return render(request, 'orders/order/istatistikler.html', context)
+
+def tarih(request):
+	if not request.user.is_superuser:
+		return redirect('/') 
+	
+	if request.method=="POST":
+		ilk_tarih = request.POST.get("bir")
+		ikinci_tarih = request.POST.get("iki")
+		
+		siparisler = Order.objects.filter(created__date__gte = ilk_tarih, created__date__lte = ikinci_tarih)
+		print("")
+		print("")
+		print(siparisler)
+		print("")
+		print("")
+		satıs_adedi = siparisler.aggregate(adet = Sum("orderitem__quantity"))
+		toplam_satıs = siparisler.aggregate(toplam = Sum("toplam_urun_tutarı"))
+	
+		siparis_elemanları = OrderItem.objects.filter(order__created__date__gte = ilk_tarih, order__created__date__lte = ikinci_tarih)
+		urunler = Product.objects.filter(orderitem__order__created__date__gte = ilk_tarih, orderitem__order__created__date__lte = ikinci_tarih)
+		urun_sayısı = urunler.annotate(sayi = Sum("orderitem__quantity"))
+		kategoriler = AnaCategory.objects.filter(altkategoriler__product__orderitem__order__created__date__gte = ilk_tarih, altkategoriler__product__orderitem__order__created__date__lte = ikinci_tarih)
+		kategori_sayısı = kategoriler.annotate(adet = Sum("altkategoriler__product__orderitem__quantity"))
+	
+		
+		context = {
+			'satıs_adedi': satıs_adedi,
+			'toplam_satıs': toplam_satıs,
+			'ilk_tarih': ilk_tarih,
+			'ikinci_tarih': ikinci_tarih,
+			'siparisler': siparisler,
+			'urunler':urunler,
+			'urun_sayısı': urun_sayısı,
+			'kategori_sayısı': kategori_sayısı,
+		}
+	
+		return render(request, 'orders/order/tarih.html', context)
+		#return redirect('anasayfa:anasayfa')
+	
+	return redirect('anasayfa:anasayfa')
+	
 
 def siparis_detail(request, id):
 	if not request.user.is_superuser:

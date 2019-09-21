@@ -7,6 +7,7 @@ app_name = 'orders'
 urlpatterns = [
     url(r'^create/$', views.order_create, name='order_create'),
 	url(r'^siparislerim/$', views.siparislerim, name='siparisler'),
+	path('tarih/', views.tarih, name='tarih'),
 	url(r'^siparisler/$', views.tum_siparisler, name='siparislerin_hepsi'),
 	path('istatistikler/', views.istatistikler, name='istatistikler'),
 	path('istatistikler/<int:gun>/', views.istatistik, name='istatistik'),
