@@ -9,6 +9,7 @@ urlpatterns = [
 	url(r'^siparislerim/$', views.siparislerim, name='siparisler'),
 	path('tarih/', views.tarih, name='tarih'),
 	url(r'^siparisler/$', views.tum_siparisler, name='siparislerin_hepsi'),
+	path('siparisler/<int:sayi>/', views.tum_siparisler_filtre, name='siparislerin_hepsi_filtre'),
 	path('istatistikler/', views.istatistikler, name='istatistikler'),
 	path('istatistikler/<int:gun>/', views.istatistik, name='istatistik'),
 	url(r'^siparis-ekle/$', views.siparis_ekle, name='siparis-ekle'),

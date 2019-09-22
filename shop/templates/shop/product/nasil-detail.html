@@ -24,6 +24,10 @@
 				<img src="{{resim.image1.url}}" class="img-fluid img-thumbnail mb-2" alt="{{resim.isim}}">
 			{% endfor %}	
 		  {% endif %}
+  <div class="btn-group btn-group-sm justify-content-between w-100" role="group" aria-label="Basic example">
+  <a href = "{{product.category.ana_kategori.get_absolute_url}}" type="button" class="btn btn-warning">Kategorinin Diğer Ürünleri</a>
+  <a href = "{{product.get_absolute_url}}" type="button" class="btn btn-success btn-sm">Ürüne Git</a>
+  </div>
 		</div>
 	</div>
 </div>

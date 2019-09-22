@@ -31,6 +31,18 @@ def tum_siparisler(request):
 	
 	return render(request, 'orders/order/siparislerin_hepsi.html', context)
 
+def tum_siparisler_filtre(request, sayi):
+	if not request.user.is_superuser:
+		return redirect('/') 
+	
+	
+	siparisler = Order.objects.filter(siparis_durumu = sayi)
+	context = {
+		'siparisler': siparisler,
+	}
+	
+	return render(request, 'orders/order/siparislerin_hepsi.html', context)	
+
 def istatistik (request, gun):
 	if not request.user.is_superuser:
 		return redirect('/') 

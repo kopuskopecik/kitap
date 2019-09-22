@@ -20,6 +20,7 @@ SIPARIS_DURUMLARI = (
     ('1', 'İşlemde'),
     ('2', 'Hazırlanıyor'),
     ('3', 'Kargoya Teslim Edildi'),
+	('4', 'İptal'),
 )
 
 
