@@ -217,6 +217,18 @@ def siparis_detail_urun_ekle(request, id):
 	
 	return render(request, 'orders/order/siparis-detail-urun-ekle.html', context)
 
+def load_cities(request):
+    if not request.user.is_superuser:
+        return redirect('/')
+    country_id = request.GET.get('kategori')
+    print("")
+    print("")
+    print("Kategori Id:", country_id)
+    print("")
+    print("")
+    cities = Product.objects.filter(category__ana_kategori_id=country_id)
+    return render(request, 'orders/order/city_dropdown_list_options.html', {'cities': cities})
+
 def siparis_ekle(request):
 	if not request.user.is_superuser:
 		return redirect('/')

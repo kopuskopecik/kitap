@@ -22,6 +22,7 @@ from django.conf.urls.static import static
 from django.views.generic import TemplateView
 from django.contrib.sitemaps.views import sitemap
 
+from orders.views import load_cities
 
 from accounts.views import TeacherSignUpView, UserUpdateView, SignUpView, UyelikView
 from anasayfa.sitemaps import AnaCategorySitemap, ProductSitemap, StaticViewSitemap, GenelSitemap
@@ -77,6 +78,8 @@ urlpatterns = [
         name='password_change'),
     url(r'^settings/password/done/$', auth_views.PasswordChangeDoneView.as_view(template_name='password_change_done.html'),
         name='password_change_done'),
+	
+	path('ajax/load-cities/', load_cities, name='ajax_load_cities'),  # <-- this one here
 	
 	path('cart/', include('cart.urls')),
     path('orders/', include('orders.urls')),
