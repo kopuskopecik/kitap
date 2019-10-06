@@ -187,10 +187,10 @@ def siparis_detail(request, id):
 		'siparis': siparis,		
 	}
 	
-	if not siparis == Order.objects.last():
+	if not siparis == Order.objects.first():
 		onceki_siparis = siparis.get_previous_by_created()
 		context["onceki_siparis"] = onceki_siparis
-	if not siparis == Order.objects.first():
+	if not siparis == Order.objects.last():
 		sonraki_siparis = siparis.get_next_by_created()
 		context["sonraki_siparis"] = sonraki_siparis	
 	
