@@ -10,7 +10,7 @@
 		<div class = "col-md-3 pl-0 mt-0 detailmenu liste">
 			<div class="list-group list-group-flush mt-0">
 			  {% for order in siparisler %}
-				<a href="{{order.get_absolute_url}}" class="list-group-item list-group-item-action list-group-item-info {% if order.id ==  order.id %}active{% endif %}">{{order.first_name}} {{order.last_name}}<small><b>-{{order.created|date}}</b></small></a>
+				<a href="{{order.get_absolute_url}}" class="list-group-item list-group-item-action list-group-item-info {% if order.id ==  order.id %}active{% endif %}">{{order.first_name}} {{order.last_name}}<small><b>-{{order.get_siparis_durumu_display}}-{{order.created|date}}</b></small></a>
 			  {% endfor %}
 			</div>
 		</div>
