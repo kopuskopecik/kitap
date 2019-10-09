@@ -63,11 +63,10 @@
 			
 			<div class = "oklar">
 			  {% if onceki_siparis %}
-				<p class = "text-left"><a href="{{onceki_siparis.get_absolute_url}}" class="btn btn-success" role="button"><i class ="fas fa-angle-double-left"></i> {{onceki_siparis.first_name}} {{onceki_siparis.last_name}} </a></p>
+				<p class = "text-right"><a href="{{onceki_siparis.get_absolute_url}}" class="btn btn-success" role="button">{{onceki_siparis.first_name}} {{onceki_siparis.last_name}} <i class ="fas fa-angle-double-right"></i></a></p>
 			  {% endif %}
 			  {% if sonraki_siparis %}
-				<p class = "text-right"><a href="{{sonraki_siparis.get_absolute_url}}" class="btn btn-success" role="button">{{sonraki_siparis.first_name}} {{sonraki_siparis.last_name}} <i class ="fas fa-angle-double-right"></i></a></p>
-				
+				<p class = "text-left"><a href="{{sonraki_siparis.get_absolute_url}}" class="btn btn-success" role="button"><i class ="fas fa-angle-double-left"></i> {{sonraki_siparis.first_name}} {{sonraki_siparis.last_name}} </a></p>
 			  {% endif %}					
 			</div>
 		</div>

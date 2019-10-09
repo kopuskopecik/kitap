@@ -42,7 +42,7 @@ class Order(models.Model):
     toplam_urun_tutarı = models.PositiveIntegerField("Ürün bedeli", default=0)
 	
     class Meta:
-        ordering = ('created', )
+        ordering = ('-created', )
         verbose_name = 'Sipariş'
         verbose_name_plural = "Siparişler"
 		
