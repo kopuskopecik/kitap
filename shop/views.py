@@ -5,8 +5,8 @@ from cart.forms import CartAddProductForm
 
 def product_list(request):
     categories = AnaCategory.objects.filter(aktif = True).order_by('sıralama_sayısı')
-    products1 = Product.objects.filter(category__aktif = True, aktif = True, ogrenci_sayisi = "e").order_by("category__sayi")
-    products2 = Product.objects.filter(category__aktif = True, aktif = True, ogrenci_sayisi = "a").order_by("category__sayi")
+    products1 = Product.objects.filter(category__ana_kategori__aktif = True, category__aktif = True, aktif = True, ogrenci_sayisi = "e").order_by("category__sayi")
+    products2 = Product.objects.filter(category__ana_kategori__aktif = True, category__aktif = True, aktif = True, ogrenci_sayisi = "a").order_by("category__sayi")
 
     ogrenci_sayısı = (
 		('b', 10),
@@ -30,7 +30,7 @@ def product_list(request):
 
 def product_filter_list(request, sayi):
     categories = AnaCategory.objects.filter(aktif = True).order_by('sıralama_sayısı')
-    products1 = Product.objects.filter(category__aktif = True, ogrenci_sayisi = sayi, aktif = True).order_by("category__sayi")
+    products1 = Product.objects.filter(category__ana_kategori__aktif = True, category__aktif = True, ogrenci_sayisi = sayi, aktif = True).order_by("category__sayi")
 
     ogrenci_sayısı = (
 		('b', 10),
