@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 from ckeditor.fields import RichTextField
 
+
 STATUS_CHOICES = (
 	('a', 0),
 	('b', 10),

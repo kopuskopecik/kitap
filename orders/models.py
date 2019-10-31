@@ -4,6 +4,7 @@ from accounts.models import User
 from django.urls import reverse
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
+from decimal import Decimal
 #from phone_field import PhoneField
 
 from cart.models import Kargo
@@ -154,7 +155,7 @@ class OrderItem(models.Model):
         return self.price * self.quantity
     
     def get_agırlık(self):
-        return self.agırlık * self.quantity
+        return Decimal(self.agırlık) * self.quantity
 	
     def save(self, *args, **kwargs):
         self.price = self.product.price
