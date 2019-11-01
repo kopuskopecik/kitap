@@ -140,7 +140,7 @@ class OrderItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name = "Ürün")
     price = models.DecimalField("Fiyat", max_digits=10, decimal_places=2, default = 0)
     quantity = models.PositiveIntegerField("Miktar", default=1)
-    agırlık = models.PositiveIntegerField("Ağırlık", default=0)
+    agırlık = models.FloatField("Ağırlık", default=0)
 	
     def __str__(self):
         return self.product.name
@@ -155,7 +155,7 @@ class OrderItem(models.Model):
         return self.price * self.quantity
     
     def get_agırlık(self):
-        return Decimal(self.agırlık) * self.quantity
+        return self.agırlık * self.quantity
 	
     def save(self, *args, **kwargs):
         self.price = self.product.price
