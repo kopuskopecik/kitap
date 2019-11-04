@@ -37,10 +37,16 @@
 	</nav>
 
       <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
-        <div class="container-fluid">
+        <div class="container-fluid text-white">
 		  
-          <a class="navbar-brand" href="{% url 'anasayfa:anasayfa' %}"> <i class="fas fa-book-reader"></i> Kitap Turnuvası</a>
-
+          <div class = "d-flex">
+			<div class = "d-flex flex-column">
+			<a class="navbar-brand my-0 py-0" href="{% url 'anasayfa:anasayfa' %}"> <i class="fas fa-book-reader my-0 py-0"></i></a>
+			<a class = "text-white text-bold my-0 py-0" href="{% url 'anasayfa:anasayfa' %}">2012</a>
+			</div>
+			<div class = "align-self-center navbar-brand">Kitap Turnuvası</div>
+			</div>
+			 
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -141,7 +147,7 @@
       </li>
     </ul>
 	
-	   <p class = "text-center mb-0"> © 2017 Tüm hakları saklıdır - <a href = "{% url 'anasayfa:copyright' %}" class = "text-white"> Kullanım Hakları</a> </p>
+	   <p class = "text-center mb-0"> © 2012 Tüm hakları saklıdır - <a href = "{% url 'anasayfa:copyright' %}" class = "text-white"> Kullanım Hakları</a> </p>
 		</footer>	
 	   
     {% endblock body %}	
