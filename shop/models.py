@@ -5,7 +5,7 @@ from ckeditor.fields import RichTextField
 
 STATUS_CHOICES = (
 	('a', 0),
-	('b', 10),
+('b', 10),
     ('c', 15),
     ('d', 20),
     ('e', 25),

@@ -37,7 +37,7 @@
   <p class = "mx-auto mb-0">Öğrenci Sayısı</p>
 	<div class="d-flex btn-group mt-1 justify-content-center" role="group" aria-label="Basic example">
 	  {% for product in products %}
-		<a href = "{{product.get_absolute_url}}"type="button" class="btn btn-success btn-sm">{{product.get_ogrenci_sayisi_display}}</a>
+		<a href = "{{product.get_absolute_url}}"type="button" class="btn btn-light btn-sm">{{product.get_ogrenci_sayisi_display}}</a>
 	  {% endfor %}
 	</div>
   
