@@ -3,7 +3,8 @@ from django.contrib import admin
 from .models import Genel, Slayt, Yorum, Dokuman
 
 class GenelAdmin(admin.ModelAdmin):
-    list_display = ['başlık', 'resim_grubu',]
+    list_display = ['başlık', 'resim_grubu', "sira"]
+    list_editable = ['sira']
     prepopulated_fields = {'slug': ('başlık',)}
    
 class SlaytAdmin(admin.ModelAdmin):

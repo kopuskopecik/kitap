@@ -81,6 +81,7 @@ class Genel(models.Model):
 	class Meta:
 		verbose_name = 'Genel-Konu'
 		verbose_name_plural = 'Genel-Konular'
+		ordering = ['sira']
 	
 	def __str__(self):
 		return self.başlık

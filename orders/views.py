@@ -59,7 +59,7 @@ def istatistik (request, gun):
 	
 	küme1 = []
 	
-	siparisler = Order.objects.filter(created__gte = geçmiş)
+	siparisler = Order.objects.all()
 	satıs_adedi = siparisler.aggregate(adet = Sum("orderitem__quantity"))
 	toplam_satıs = siparisler.aggregate(toplam = Sum("toplam_urun_tutarı"))
 	

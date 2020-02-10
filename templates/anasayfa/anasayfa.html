@@ -16,7 +16,8 @@
 		<div class="card-body">
         {% for category in ana_kategoriler%}		 
 	        <a href = "{{category.get_absolute_url}}" type="button" class="btn {{category.arka_plan_renk}} btn-sm btn-block">{{category.name}}</a>
-	   	{% endfor %} 
+		   {% endfor %} 
+		   <a href = "{% url 'anasayfa:cok_satanlar'  %}" type="button" class="btn btn-danger btn-sm btn-block">Çok Satanlar</a>
 		</div>
     </div>
   </div>

@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect, HttpResponse
 from django.views import generic
 from django.contrib.messages.views import SuccessMessageMixin
+from django.db.models import Avg, Count, Sum
 
 from .models import Genel, Slayt, Yorum, Dokuman
 
 from shop.models import Category, Product, AnaCategory
+
 
 
 class AnaSayfa(generic.ListView):
@@ -34,7 +36,18 @@ class AnaSayfa(generic.ListView):
 		context["urunler"] = urunler
 		context["genel"] = genel
 		return context
+
+
+def cok_satanlar(request):
 	
+	kategoriler = Category.objects.exclude(ana_kategori__bireysel_mi = True, ana_kategori__sadece_madalyalı_mı = True).filter(aktif = True, ana_kategori = True)
+	kategori_sayısı = kategoriler.annotate(adet = Sum("product__orderitem__quantity")).order_by("-adet")
+
+	context = {
+		'kategoriler': kategoriler,
+		'kategori_sayısı': kategori_sayısı,
+	}
+	return render(request, 'anasayfa/en_cok_satanlar.html', context)
 
 class GenelDetailView(generic.DetailView):
 	model = Genel
