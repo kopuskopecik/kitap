@@ -34,12 +34,19 @@
   
 </div>
   {% if product.category.ana_kategori.sayfa_durumu %}
-  <p class = "mx-auto mb-0">Öğrenci Sayısı</p>
-	<div class="d-flex btn-group mt-1 justify-content-center" role="group" aria-label="Basic example">
-	  {% for product in products %}
-		<a href = "{{product.get_absolute_url}}"type="button" class="btn btn-light btn-sm">{{product.get_ogrenci_sayisi_display}}</a>
-	  {% endfor %}
-	</div>
+   
+    <div class="mx-auto mb-0 dropdown">
+      <button class="btn btn-light btn-sm d-inline dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Öğrenci Sayısı: {{product.get_ogrenci_sayisi_display}}
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        {% for product in products %}
+        <a class="dropdown-item " href="{{product.get_absolute_url}}"> {{product.get_ogrenci_sayisi_display}}</a>
+        {% endfor %}
+      </div>
+    </div>
+  
+	
   
   {% endif %}
     <h5 class="card-title urun-basligi">{{product.name}}</h5>
