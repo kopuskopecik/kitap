@@ -23,8 +23,17 @@ def tum_siparisler(request):
 	if not request.user.is_superuser:
 		return redirect('/') 
 	
-	
 	siparisler = Order.objects.all()
+
+	query = request.GET.get("q")
+	print(query)
+	if query:
+		#query = query.replace("I", "ı").replace("İ", "i").lower()
+		print(query)
+		siparisler = Order.objects.filter(first_name__icontains =query).distinct()
+		print(siparisler)
+
+	
 	context = {
 		'siparisler': siparisler,
 	}

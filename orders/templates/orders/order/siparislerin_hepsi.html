@@ -9,7 +9,8 @@
 <div class = "row justify-content-md-center">
 	<div class = "col-md-8">
 		<h1 class = "text-center text-info py-0 mb-0">Tüm Siparişler</h1>
-		 <div class="btn-group btn-group-sm justify-content-between w-100" role="group" aria-label="Basic example">
+		
+		 <div class="btn-group btn-group-sm justify-content-between w-100 mb-2" role="group" aria-label="Basic example">
 			<a href = "{% url 'orders:siparislerin_hepsi'%}" type="button" class="btn btn-primary">Hepsi</a>
 			<a href = "{% url 'orders:siparislerin_hepsi_filtre' 1 %}" type="button" class="btn btn-danger">İşlemde</a>
 			<a href = "{% url 'orders:siparislerin_hepsi_filtre' 2 %}" type="button" class="btn btn-warning">Hazırlanıyor</a>
@@ -17,6 +18,14 @@
 			<a href = "{% url 'orders:siparislerin_hepsi_filtre' 4 %}" type="button" class="btn btn-secondary">İptal</a>
 
 		</div>
+
+		<form class="form-inline justify-content-md-center form-sm">
+			<div class="form-group mx-sm-3 mb-2">
+			<label for="inputPassword2" class="sr-only">Sipariş</label>
+			  <input type="text" class="form-control" id="inputPassword2" placeholder="İsim" name ="q">
+			</div>
+			<button type="submit" class="btn btn-primary mb-2">Ara</button>
+		  </form>
 		<div class="card-body">
 			<div class="list-group">
 			{% for siparis in siparisler %}
