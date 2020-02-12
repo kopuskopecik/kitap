@@ -41,7 +41,7 @@ class AnaSayfa(generic.ListView):
 def cok_satanlar(request):
 	
 	kategoriler = Category.objects.filter(aktif = True, ana_kategori__aktif = True).exclude(ana_kategori__bireysel_mi = True, ana_kategori__sadece_madalyalı_mı = True)
-	kategori_sayısı = kategoriler.annotate(adet = Sum("product__orderitem__quantity")).order_by("-adet")
+	kategori_sayısı = kategoriler.annotate(adet = Sum("product__orderitem__quantity")).order_by("-adet")[0:12]
 
 	context = {
 		'kategoriler': kategoriler,
