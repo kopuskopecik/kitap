@@ -2,8 +2,8 @@
 {% load static %}
 
 {% block sharethis %}
-	<script async src="https://platform-api.sharethis.com/js/sharethis.js#property=5d72714eab6f1000123c810c&product=sticky-share-buttons"></script>
-	<script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=5d72714eab6f1000123c810c' async='async'></script>
+<script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=5f789baf58d3aa0012f5752a&product=sop' async='async'></script>
+
 {% endblock %}
 
 
@@ -12,7 +12,7 @@
 <div class = "row">
   <div class = "col-md-4 col-sm-12 sol">
       <div class="card mb-2 text-center border border-white">
-		<div class="card-header bg-danger text-white py-0">İLKOKUL-ORTAOKUL</div>
+		<div class="card-header bg-danger text-white py-0">KATEGORİLER</div>
 		<div class="card-body">
         {% for category in ana_kategoriler%}		 
 	        <a href = "{{category.get_absolute_url}}" type="button" class="btn {{category.arka_plan_renk}} btn-sm btn-block">{{category.name}}</a>
